@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>COMMUNITY BOARD</title>
+  <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+
+<div class="row purple lighten-2" id="header">
+<header>
+  <nav class = "nav col s2 offset-2">
+    {{#user}} <a href = "/users/{{id}}"> <button class=" u-full-width red darken-1"> Profile </button> </a> {{/user}}
+    <a href = "/posts"> <button class=" u-full-width red darken-1"> Forum </button> </a>
+    <a href = "/top-posts"> <button class="u-full-width red darken-1"> Top Posts </button> </a>
+  </nav>
+
+  <div class="question col s6 offset-s3">
+    <h2> Newsroom </h2>
+    <p> Education From The Future</p>
+  </div>
+
+
+</header>
+
+<div class="nav" id="dropdwon-menu">
+
+    <button id="search" class="btn-large red darken-1 hoverable">
+      Search
+    </button>
+
+<div id="drop-list" class="hide z-depth-2 hoverable transparent">
+
+      <ul id="business" class="red">
+         <h3> Business </h3>
+        <li class="divider"> </li>
+        <li id="bloomberg" class="u-full-width"> Bloomberg </li>
+        <li id ="wall-street"> Wall Street Journal</li>
+        <li id="the-economist"> The Economist </li>
+        <li id="NYT-biz"> New York Times</li>
+        <li id="fortune"> Fortune </li>
+        <li id="business-insider"> Business Insider </li>
+      </ul>
+
+      <ul id="tech" class="red">
+         <h3> Tech </h3>
+        <li class="divider"> </li>
+        <li id ="ars-technica"> Ars Technica</li>
+        <li id ="hacker-news"> Hacker News</li>
+        <li id ="recode"> Recode </li>
+        <li id="hacker-news">Hacker News </li>
+        <li id="NYT-tech"> New York Times</li>
+        <li id="techcrunch">Techcrunch </li>
+        <li id="ars-technica"> Ars Technica</li>
+        <li id="engadget"> Engadget</li>
+        <li> </li>
+        <li> </li>
+
+      </ul>
+
+    </div>
+</div>
+
+</div> <!--ends header  -->
+
+
+<script src="js/jquery.js"></script>
+<script src="js/news.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+</body>
+</html>

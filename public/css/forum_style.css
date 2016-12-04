@@ -1,0 +1,98 @@
+*{
+  font-family:'Bungee Shade', cursive;
+}
+div.row#header{
+  float:left;
+  height: 10%;
+  width: 100%;
+}
+
+div.row.purple#header div.nav{
+  width: 38%;
+  height: 67%;
+  border-radius: 50%;
+  top: -25%;
+  left: -15%;
+  position: absolute;
+  background-color: purple;
+  margin: 50px 0px 50px;
+  padding: 50px auto;
+  text-align: center;
+}
+
+div.nav a button{
+  font-family: "Bungee", cursive;
+  position: relative;
+  background: none;
+  border: none;
+  top: 200px;
+  left: 100px;
+  /*text-align: center;*/
+  color: black;
+  display: block;
+  border-radius: 7px;
+  margin: 40px auto;
+  height: 30px;
+}
+div.nav p{
+  text-align: center;
+  display: inline-block;
+  font-family: 'Bungee', cursive;
+}
+
+div.row div.question{
+  font-size: 20px;
+  text-overflow: hidden;
+  text-align: left;
+}
+div.row div.question p{
+ font-family: "Bungee Inline", cursive;
+}
+
+div.row div.posting_block{
+  position: fixed;
+  float: right;
+  background-color: white;
+  box-shadow: 25px gray;
+  height: 100%;
+  z-index: 100;
+  font-family: 'Bungee Inline', cursive;
+}
+div.row div div.row div.prompt p{
+  font-size: 22px;
+}
+
+div.row div.posting_block.hoverable aside div.row {
+  font-family:'Bungee', cursive;
+
+}
+div.row div div.row div.prompt p{
+  font-size: 16px;
+  display: inline-block;
+  float: right;
+  text-align: left;
+}
+
+div.row div.posting_block div.body.input_field textarea{
+  height: 35%;
+}
+
+div.row button.btn-floating{
+  text-align: fill;
+  margin: 20px 10px 30px 10px;
+
+}
+
+div#sidebar{
+  height: 1000px;
+}
+
+div.post_container p{
+  font-family:'Bungee Inline', cursive;
+  display: inline-block;
+}
+
+div.row div.post_container{
+  font-family:'Bungee Shade', cursive;
+  background-color: white;
+}

@@ -1,0 +1,148 @@
+*{
+  font-family:'Bungee Shade', cursive;
+}
+body {
+  background-color: purple;
+ }
+div.row#header{
+  float:left;
+  height: 10%;
+  width: 100%;
+}
+
+div.row.purple#header nav.nav{
+  width: 35%;
+  height: 65%;
+  border-radius: 50%;
+  top: -25%;
+  left: -15%;
+  position: absolute;
+  background-color: purple;
+  margin: 50px 0px 50px 20px;
+  padding: 50px auto;
+  text-align: center;
+}
+
+nav.nav a button{
+  font-family: "Bungee", cursive;
+  position: relative;
+  background: none;
+  border: none;
+  top: 250px;
+  left: 17%;
+  color: black;
+  display: block;
+  border-radius: 7px;
+  margin: 20px auto;
+}
+
+div.row.source{
+  font-family: Bungee;
+}
+
+
+div.nav.nav p{
+  text-align: center;
+  display: inline-block;
+  font-family: Bungee, cursive;
+}
+
+div.row div.question{
+  font-size: 20px;
+  text-overflow: hidden;
+  text-align: left;
+}
+div.row div.question p{
+ font-family: "Bungee Inline", cursive;
+}
+
+
+
+div.source div.article{
+  margin: 50px 20px 15px 50px;
+}
+
+/*div.row.purple#header div#dropdown-list.row.col.s12.dropdown-content{
+  width: 50%;
+  height: 100%;
+}*/
+
+div.source{
+  text-align: center;
+}
+
+div.source div.article p{
+  font: 16px "Bungee Inline";
+  text-align: left;
+  padding: 20px;
+  margin: 10px auto;
+}
+
+div.source div.article button{
+    height: 60px;
+    width: 240px;
+    font-size: 24px;
+
+}
+@keyframes slideOut{
+  0%{height: 0px;
+     opacity: 0.4;
+   }
+  100%{height: 250px;
+        opacity: 1;
+      }
+}
+
+div.nav#dropdown-menu{
+/*  position: absolute;
+  top: 5%;
+  left: 65%;*/
+  display: inline-block;
+}
+
+/*div.nav#dropdown-menu button#search{
+  position: absolute;
+  top: 10%;
+
+}
+*/
+div.show{
+  animation: slideOut 0.5s;
+}
+
+div.hide{
+  animation: slideIn 0.5s;
+}
+
+div#drop-list{
+  position: absolute;
+  left: 75%;
+  top: 10%;
+}
+
+div#drop-list ul li{
+  font: 15px "Bungee Inline";
+  margin: 5px auto;
+}
+
+div#drop-list ul li:hover{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+button#search{
+  font-family: Bungee;
+  margin-top: 60px;
+  margin-left: -100px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+*{
+  font-family: "Bungee Shade";
+}
+div.news.nav{
+  width: 25%;
+  height: 50%;
+  border-radius: 50%;
+  position: absolute;
+  background-color: purple;
+  color: white;
+}
+
+div.forum.nav{
+  width: 25%;
+  height: 50%;
+  border-radius: 50%;
+  left: 75%;
+  position: absolute;
+  background-color: purple;
+  color: white;
+}
+
+div.tags.nav{
+  width: 25%;
+  height: 50%;
+  border-radius: 50%;
+  top: 50%;
+  position: absolute;
+  background-color: purple;
+  color: white;
+}
+
+div.posts.nav{
+  width: 25%;
+  height: 50%;
+  border-radius: 50%;
+  top: 50%;
+  left: 75%;
+  position: absolute;
+  background-color: purple;
+  color: white;
+}
+
+div.nav button.btn {
+  font: "Bungee";
+}
+
+div.nav.news button{
+  position: relative;
+  top: 135px;
+  left: 120px;
+  margin: 20px;
+}
+
+div.nav.tags button{
+  position: absolute;
+  top: 270px;
+  left: 155px;
+  /*margin: 20px auto;*/
+}
+
+div.nav.forum button{
+  position: relative;
+  left: 120px;
+  top: 150px;
+}
+
+div.nav.posts button{
+  position: relative;
+  top: 150px;
+  left: 130px;
+  margin: 20px;
+}
+
+
+div.nav h3{
+  text-align: center;
+  position: relative;
+  top: 40%;
+}
+
+div.intro{
+  position: absolute;
+  top: 30%;
+  left: 25%;
+}
+div.intro h2{
+  text-align: center;
+}
