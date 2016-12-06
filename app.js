@@ -112,7 +112,10 @@ app.post('/signup', function(req,res){
 
 var response;
 
-app.get('/news', function(req,res){
+//uses route call to get all news data and append at once
+//AJAX currently in place as alternative
+
+//app.get('/news', function(req,res){
 // fetch("https://api.nytimes.com/svc/mostpopular/v2/mostviewed//.json/?api-key="+nyt)
 //   .then(function(data){
 //     console.log(data);
@@ -140,10 +143,14 @@ app.get('/news', function(req,res){
 //     console.log("Data sent to /news");
 //     console.log(response);
   // res.render('news', {'data':response});
+
+// })
+//});
+
+app.get('/news', function(req,res){
   user = req.session.user;
   res.render('news', {'user': user})
-// })
-});
+})
 
 app.post('/news', function(req,res){
   //save data to invisible form
@@ -162,12 +169,18 @@ app.get('/posts', function(req,res){
   var user = req.session.user;
 
   console.log(user);
-  db.many(
-   // "SELECT posts.id, posts.ups, subject, body, username, users.id FROM posts,users"
+  db.any(
+   // "SELECT posts.id, ups, subject, body, user_name, posts.user_id, comment FROM posts,comments"
+   // "SELECT * FROM posts INNER JOIN comments ON (posts.id = post_id)"
    //"SELECT posts.id, posts.user_id, users.id FROM posts JOIN users on posts.user_id = users.id"
-   "SELECT * FROM posts LEFT OUTER JOIN comments ON (post_id = posts.id)"
+   "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id)"
+   // "SELECT * FROM posts"
+
     ).then(function(data){
-      console.log(data)
+      post_userID = data.user_id
+      postID = data.id
+      console.log(postID, post_userID);
+    // console.log(data)
     var forum = {'forum': data, 'user': user};
     console.log("forum post id search", forum);
     res.render('forum', forum);
@@ -182,22 +195,33 @@ app.get('/posts', function(req,res){
 });
 
 app.post('/posts', function(req,res){
+
   var user = req.session.user;
   var subject = req.body.subject;
   var body = req.body.body;
-  var username = req.body.username
-  console.log(subject, body);
-  db.none("INSERT INTO posts(subject, body, username, user_id) VALUES ($1,$2,$3,$4)",
+  var username = req.body.username;
+
+  console.log(subject, body, username, user.id);
+
+  db.none("INSERT INTO posts(subject, body, user_name, user_id) VALUES ($1,$2,$3,$4)",
     [subject, body, username, user.id])
-  .catch(function(req,res){
-      res.send("You must log on in order to post, my friend");
-    })
   .then(function(){
     db.many("SELECT * FROM posts LEFT OUTER JOIN comments ON (post_id = posts.id)")
     .then(function(data){
       res.render('forum', {'forum': data});
     })
   })
+})
+
+app.get('/posts/:id',function(req,res){
+ var user = req.session.user;
+ db.any(
+  "SELECT * FROM posts, comments WHERE posts.id, post_id = $1",
+  [req.params.id]
+  )
+ .then(function(data){
+  res.render('forum', {'forum':data, 'user':user})
+ })
 })
 
 app.post('/posts/:id', function(req,res){
@@ -244,11 +268,14 @@ app.get('/user', function(req,res){
   res.send('You must log in to access your account buddy');
 })
 
+app.get('/user', function(req,res){
+    res.send("You must log on to access you profile page")
+})
 
-app.get('/user/:id', function(req,res){
+app.get('/user/:name', function(req,res){
     var user = req.session.user;
-    db.any("SELECT * FROM posts WHERE user_id = 1"
-      // [user.id]
+    db.any("SELECT * FROM posts WHERE user_name = $1",
+      [req.params.name]
     ).catch(function(){
       res.send("YOU MUST LOG ON TO ACCESS YOUR PROFILE");
     })
@@ -258,13 +285,13 @@ app.get('/user/:id', function(req,res){
 
 });
 
-app.put('/user/:id', function(req,res){
+app.put('/user/:name', function(req,res){
   const update = req.body;
   var user = req.session.user;
   bcrypt.hash(update.password, 10, function(err, hash){
     db.none(
-     "UPDATE users SET username=$1, hash=$2, email=$3, school=$4 WHERE id = $5",
-    [update.username, hash, update.email, update.school, req.params.id]
+     "UPDATE users SET username=$1, hash=$2, email=$3, school=$4 WHERE username = $5",
+    [update.username, hash, update.email, update.school, req.params.name]
     )
   .then(function(){
     res.redirect('/user/'+user.id);
@@ -272,10 +299,10 @@ app.put('/user/:id', function(req,res){
   });
 });
 
-app.delete('/user/:id', function(req,res){
+app.delete('/user/:name', function(req,res){
   console.log("user deleted");
   db.one("DELETE FROM users,posts WHERE (users.id=$1 OR posts.users_id = $1)",
-    [req.params.id])
+    [req.params.name])
     .then(function(user){
       console.log(user);
       res.redirect('/posts')

@@ -146,7 +146,7 @@ jQuery(document).ready(function($) {
 
     var $drop = $('#drop-list');
 
-    $("#search+#drop-list").mouseover(function(){
+    $("#search").mouseover(function(){
         console.log('showing now');
         $drop.removeClass('hide');
         $drop.addClass('show');
@@ -156,7 +156,7 @@ jQuery(document).ready(function($) {
         //     $($drop).removeClass("show").addClass("hide");
         // }
     });
-    $("#search+#drop-list").mouseout(function(){
+    $("#search").mouseout(function(){
         console.log('showing now');
         $drop.removeClass('show');
         $drop.addClass('hide');

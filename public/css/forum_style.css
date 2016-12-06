@@ -1,5 +1,8 @@
 *{
-  font-family:'Bungee Shade', cursive;
+  font-family:'Bungee', cursive;
+}
+* p {
+  font-family: "Titillium Web", sans-serif;
 }
 div.row#header{
   float:left;

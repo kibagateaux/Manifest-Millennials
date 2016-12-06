@@ -5,6 +5,9 @@ INSERT INTO posts(subject, body, ups, user_name, user_id) VALUES ('The economic 
 INSERT INTO posts(subject, body, ups, user_name, user_id) VALUES ('Crippling ear drums', 'How do I stop these voices', 2, 'a', 1);
 INSERT INTO posts(subject, body, ups, user_name, user_id) VALUES ('📺⛩📷💎', '🏄🏿🏸', 2, 'a', 1);
 INSERT INTO comments(comment, post_id, user_id) VALUES ('that"s sick', 10, 1);
+INSERT INTO comments(comment, post_id, user_id) VALUES ('lade dah', 1, 2);
+INSERT INTO comments(comment, post_id, user_id) VALUES ('blah blah', 1, 1);
+INSERT INTO comments(comment, post_id, user_id) VALUES ('lade dah', 3, 2);
 
 --INSERT INTO user (id, name, username, opted_in)
 --  SELECT id, name, username, opted_in

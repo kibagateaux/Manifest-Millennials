@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>COMMUNITY BOARD</title>
-  <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Bungee+Shade" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Bungee+Shade|Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link rel="stylesheet" href="css/forum_style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="purple lighten-2">
 
 <div class="row purple lighten-2" id="header">
 <header>
   <div class = "nav col s6 offset-2">
-    <a href = "/news"> <button class=" u-full-width red darken-1"> Newsroom </button> </a>
-    <a href = "/top-posts"> <button class="u-full-width red darken-1"> Top Posts </button> </a>
-    <a href = "/"> <button class=" u-full-width red darken-1"> Home  </button> </a>
+    <a href = "/news"> <button class=" u-full-width white darken-1"> Newsroom </button> </a>
+    <a href = "/top-posts"> <button class="u-full-width white darken-1"> Top Posts </button> </a>
+    <a href = "/"> <button class=" u-full-width white darken-1"> Home  </button> </a>
   </div>
 
   <div class="question col s6 offset-s3">
@@ -80,7 +82,11 @@
           <h4 class="flow-text"> {{subject}} </h4>
         </a>
 
-        <p class="flow-text"> {{ups}} <a href="/user/{{id}}"> BY {{username}} </a> </p>
+        <p id="ups" class="flow-text">
+          <a href="ups/{{posts.id}}"> {{ups}} </a>
+          <i id="ups-icon" class="materialize-icons"> call_merge </i>
+          <a href="/user/{{username}}"> BY {{username}} </a>
+        </p>
 
       </div>
       </div>
@@ -96,7 +102,7 @@
 
         <div class="row1">
         <div class="commentary col s6 input-field">
-            <form method="POST" action="/comment/{{id}}">
+            <form method="POST" action="/comment/{{posts.id}}">
                <input name="comment">
                <button type="submit"> Comment </button>
             </form>
@@ -154,6 +160,7 @@
 </div> ends post log -->
 
 <script src="js/jquery.js"></script>
+<script src="js/posts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 </body>
 </html>

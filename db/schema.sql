@@ -18,7 +18,7 @@ CREATE TABLE posts(
   subject varchar(255),
   body varchar(255) NOT NULL,
   ups integer,
-  user_name varchar(50),
+  user_name varchar(50) NOT NULL,
   user_id integer REFERENCES users (id) NOT NULL,
   stalk_id integer REFERENCES posts
 );
