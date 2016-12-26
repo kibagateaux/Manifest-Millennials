@@ -1,23 +1,14 @@
 jQuery(document).ready(function($) {
     console.log('loaded');
 
-    $('.collapsible').collapsible();
-
-
     var body = $('body');
     var $img = $('.img');
     var $title = $('.title');
     var $source = $('.source');
     var $desc = $('.desc');
 
-
     var viewNews = function(data) {
         var a = data.articles;
-
-        console.log(data);
-        console.log(data.articles[0]);
-        console.log('news source');
-        console.log(data.source);
 
         body.append('<div class="row source"> <h2>' +
             data.source + '</h2> </div>');
@@ -42,42 +33,6 @@ jQuery(document).ready(function($) {
                 '<input class="hide" name="url" value=' + a[i].url + '>' +
                 '<button class="save btn red" type="submit" > Save </button> </form>');
         }
-
-    };
-
-    var NYT = function(data) {
-
-        body.append('<div class="row source"> <h2> New York Times </h2> </div>');
-
-        console.log('preloop');
-        console.log(data);
-        console.log(data.results[2]);
-
-        data.results.forEach(function(a) {
-            for (var i = 0; i < a.length; i++) {
-
-                var article = 'article' + [i];
-                var image = 'image' + [i];
-                var image_url = "a.media.[0]media-metadata[1].url";
-
-                console.log(a);
-                console.log(image_url);
-
-                $('.source').append('<div class="col s8 article offset-s2" id="' + article + '"></div>');
-
-                $('#' + article).append('<img class="col s4 responsive-image" id="' + image + '">');
-                $('#' + image).attr('src', image_url);
-
-                $('#' + article).append('<a href="' + a.url + '">' +
-                    '<h4 class="title">' + a.title + '</h4>' +
-                    '</a>');
-                $('#' + article).append('<p class="center-align">' + a.abstract + '</p>');
-                $('#' + article).append('<form class="fave " method="POST" action="/news">' +
-                    '<input class="hide" name="title" value=' + a.title + '>' +
-                    '<input class="hide" name="url" value=' + a.url + '>' +
-                    '<button class="save btn red" type="submit" > Save </button> </form>');
-            }
-        });
     };
 
     var getNews = function(source) {
@@ -108,9 +63,6 @@ jQuery(document).ready(function($) {
             }).done(function(data) {
                 body.append('<div class="row source"> <h2> New York Times </h2> </div>');
 
-                console.log('preloop');
-                console.log(data);
-                console.log(data.results[2]);
                   var i = 0;
                 data.results.forEach(function(a) {
 
@@ -137,7 +89,7 @@ jQuery(document).ready(function($) {
                         '<input class="hide" name="url" value=' + a.url + '>' +
                         '<button class="save btn red" type="submit" > Save </button> </form>');
                     i++;
-                });//end foreach
+                });//end forEach
             })//end done
             .fail(function(err) {
                 throw err;
@@ -146,20 +98,19 @@ jQuery(document).ready(function($) {
 
     var $drop = $('#drop-list');
 
-    $("#search").mouseover(function(){
+    $("#search").mouseenter(function(){
         console.log('showing now');
-        $drop.removeClass('hide');
-        $drop.addClass('show');
-        // if (($drop).hasClass("hide")) {
-        //     $($drop).removeClass("hide").addClass("show");
-        // } else {
-        //     $($drop).removeClass("show").addClass("hide");
-        // }
+        $drop.toggleClass('show');
+        // $drop.removeClass('hide'); //Change to Toggle Class
+        // $drop.addClass('show');
     });
-    $("#search").mouseout(function(){
-        console.log('showing now');
-        $drop.removeClass('show');
-        $drop.addClass('hide');
+
+    $("#nav").mouseleave(function(){
+
+        $drop.toggleClass('show');
+        console.log('closing now');
+        // $drop.removeClass('show');
+        // $drop.addClass('hide');
       });
 
     getNews('bloomberg');

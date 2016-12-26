@@ -10,7 +10,7 @@ div.row#header{
   width: 100%;
 }
 
-div.row.purple#header nav.nav{
+div.row#header nav.nav{
   width: 35%;
   height: 65%;
   border-radius: 50%;
@@ -41,7 +41,7 @@ div.row.source{
 }
 
 
-div.nav.nav p{
+div.nav p{
   text-align: center;
   display: inline-block;
   font-family: Bungee, cursive;
@@ -84,6 +84,7 @@ div.source div.article button{
     font-size: 24px;
 
 }
+
 @keyframes slideOut{
   0%{height: 0px;
      opacity: 0.4;
