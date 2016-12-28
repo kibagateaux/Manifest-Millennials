@@ -1,13 +1,16 @@
 var express = require('express');
 var app = express();
 var mustacheExpress = require('mustache-express');
+
 var pgp = require('pg-promise')();
 var db = pgp(process.env.DATABASE_URL || 'postgres://00y@localhost:5432/mm');
+
 var override = require('method-override');
 var parser = require('body-parser');
 var session = require('express-session');
 var bcrypt = require('bcryptjs');
 var fetch = require('node-fetch');
+
 var news = process.env.NEWSAPI;
 var nyt = process.env.NYT;
 
@@ -16,7 +19,6 @@ app.use('/', express.static(__dirname+'/public'));
 app.set('views',__dirname+'/views');
 app.engine('html', mustacheExpress());
 app.set('view engine','html');
-//this
 app.use (override('_method'));
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
@@ -27,26 +29,6 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-
-var sources = [
-    'bloomberg',
-    'ars-technica',
-    'hacker-news',
-    'recode',
-    'the-wall-street-journal'
-    ];
-
- var fetchArr = sources.map(function(a){
-    var query = 'https://newsapi.org/v1/articles?source='
-      + a +
-      '&sortBy=top&apiKey=' + news +'&format=json';
-    return (
-      fetch(query)
-      .then(function(res){
-      return res.json()}) //brilliance by Tims
-    );
-});
-var sourceData;
 
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
@@ -86,66 +68,26 @@ app.post('/logon', function(req,res){
 });
 
 app.post('/signup', function(req,res){
+  //use ES6 deconstructing
+  //{email, password, username, school} = req.body
   var data = req.body;
-  var email = req.body.email;
-  var password = req.body.password;
-  var username = req.body.username;
-  var school = req.body.school;
+  var email = data.email;
+  var password = data.password;
+  var username = data.username;
+  var school = data.school;
 
   console.log(email, password, username, school);
 
-  bcrypt.hash(data.password, 10, function(err, hash){
+  bcrypt.hash(password, 10, function(err, hash){
     db.none(
       "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
       [username, hash, email, school]
     ).then(function(){
-      db.any("SELECT posts.id, posts.ups, subject, body, username, users.id FROM posts,users")
-    .then(function(data){
-      var forum = {'data': data};
-      res.render('logon')
-      })
+      res.render('logon');
     });
-  });
+  }); //ends Bcrypt
+}); //ends POST request
 
-
-})
-
-var response;
-
-//uses route call to get all news data and append at once
-//AJAX currently in place as alternative
-
-//app.get('/news', function(req,res){
-// fetch("https://api.nytimes.com/svc/mostpopular/v2/mostviewed//.json/?api-key="+nyt)
-//   .then(function(data){
-//     console.log(data);
-//     res.send(data);
-//   })
-// Promise.all(fetchArr).then(function(result){
-
-//   var response = result.map(function(a){
-//   var art = a.articles;
-
-//     for (var i = 0; i<a.articles.length; i++){
-
-//         var news = {'source': a.source,
-//                     'title': art[i].title,
-//                     'url': art[i].url,
-//                     'desc': art[i].description,
-//                     'image': art[i].urlToImage};
-//     }
-//     return news;
-//   });
-//   return response
-//     // res.render('news', {'data': response[0]});
-//   })
-// .then(function(response){
-//     console.log("Data sent to /news");
-//     console.log(response);
-  // res.render('news', {'data':response});
-
-// })
-//});
 
 app.get('/news', function(req,res){
   user = req.session.user;
@@ -163,7 +105,6 @@ app.post('/news', function(req,res){
   .then(res.redirect('/news'))
 
 })
-
 
 app.get('/posts', function(req,res){
   var user = req.session.user;
@@ -184,13 +125,6 @@ app.get('/posts', function(req,res){
     var forum = {'forum': data, 'user': user};
     console.log("forum post id search", forum);
     res.render('forum', forum);
-  //   db.any("SELECT * FROM comments WHERE post_id = $1", [forum.data.id])
-  // .then(function(comment, forum){
-  //    console.log("POST ID SEARCH", data);
-  //    res.render('forum', {'comments': comment, 'forum': forum});
-  // db.any("SELECT * FROM posts FULL OUTER JOIN users ON(posts.user_id = users.id)")
-  // db.any("SELECT * FROM users LEFT OUTER JOIN posts ON(posts.user_id = users.id)")
-    // });
   });
 });
 
@@ -220,9 +154,9 @@ app.get('/posts/:id',function(req,res){
   [req.params.id]
   )
  .then(function(data){
-  res.render('forum', {'forum':data, 'user':user})
- })
-})
+  res.render('forum', {'forum':data, 'user':user});
+ });
+});
 
 app.post('/posts/:id', function(req,res){
   var user = req.session.user;
@@ -230,7 +164,8 @@ app.post('/posts/:id', function(req,res){
   var body = req.body.body;
   console.log(subject, body);
 
-   //How to decide between post and comment?
+   //How to differentiate between post and comment being posted from same page?
+   //^^form action=""
   db.none("INSERT INTO posts(subject, body, user_id) VALUES ($1,$2,$3)",
     [subject, body, user.id]).then(function(){
       res.render('forum');
@@ -252,8 +187,6 @@ app.get('/top-posts', function(req, res){
   })
 });
 
-
-/* Change :post to :id */
 app.post('/comment/:id', function(req,res){
   var user = req.session.user;
   var comment = req.body.comment;
@@ -264,12 +197,10 @@ app.post('/comment/:id', function(req,res){
   .then(function(){res.redirect('/posts')});
 });
 
+
+//user should be personal account user/:id will be public access
 app.get('/user', function(req,res){
   res.send('You must log in to access your account buddy');
-})
-
-app.get('/user', function(req,res){
-    res.send("You must log on to access you profile page")
 })
 
 app.get('/user/:name', function(req,res){
@@ -285,8 +216,9 @@ app.get('/user/:name', function(req,res){
 
 });
 
+// .update
 app.put('/user/:name', function(req,res){
-  const update = req.body;
+  var update = req.body;
   var user = req.session.user;
   bcrypt.hash(update.password, 10, function(err, hash){
     db.none(
@@ -294,7 +226,7 @@ app.put('/user/:name', function(req,res){
     [update.username, hash, update.email, update.school, req.params.name]
     )
   .then(function(){
-    res.redirect('/user/'+user.id);
+    res.redirect('/user/'+ user.id);
     })
   });
 });
