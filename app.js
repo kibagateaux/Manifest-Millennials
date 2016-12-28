@@ -124,7 +124,7 @@ app.get('/posts', function(req,res){
     // console.log(data)
     var forum = {'forum': data, 'user': user};
     console.log("forum post id search", forum);
-    res.render('forum', forum);
+    res.render('posts', forum);
   });
 });
 
@@ -142,7 +142,7 @@ app.post('/posts', function(req,res){
   .then(function(){
     db.many("SELECT * FROM posts LEFT OUTER JOIN comments ON (post_id = posts.id)")
     .then(function(data){
-      res.render('forum', {'forum': data});
+      res.render('posts', {'forum': data});
     })
   })
 })
@@ -154,7 +154,7 @@ app.get('/posts/:id',function(req,res){
   [req.params.id]
   )
  .then(function(data){
-  res.render('forum', {'forum':data, 'user':user});
+  res.render('posts', {'forum':data, 'user':user});
  });
 });
 
@@ -168,7 +168,7 @@ app.post('/posts/:id', function(req,res){
    //^^form action=""
   db.none("INSERT INTO posts(subject, body, user_id) VALUES ($1,$2,$3)",
     [subject, body, user.id]).then(function(){
-      res.render('forum');
+      res.render('posts');
     }).catch(function(req,res){
       res.send("You must log on in order to posy, my friend");
     });
@@ -181,7 +181,7 @@ app.get('/top-posts', function(req, res){
   .then(function(data){
     console.log(data);
     // res.render('top', {'post': data});
-    res.render('forum', {'forum': data});
+    res.render('posts', {'forum': data});
   }).catch(function(e){
     console.log(e);
   })
@@ -211,7 +211,7 @@ app.get('/user/:name', function(req,res){
       res.send("YOU MUST LOG ON TO ACCESS YOUR PROFILE");
     })
     .then(function(data){
-      res.render('profile', {'data': data, 'user': user});
+      res.render('user', {'data': data, 'user': user});
     })
 
 });
