@@ -24,7 +24,7 @@ app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 
 app.use(session({
-  secret: 'theTruthIsOutThere51',
+  secret: 'youMakeYourOwnDestinyMyFriend',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
@@ -37,7 +37,7 @@ app.listen(port, function(){
 
 
 app.get('/',function(req,res){
-  user = req.session.user
+  user = req.session.user;
   res.redirect('/posts');
 });
 

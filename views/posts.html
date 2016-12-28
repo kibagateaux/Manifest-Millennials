@@ -6,42 +6,35 @@
   <title>COMMUNITY BOARD</title>
   <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Bungee+Shade|Ubuntu" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link rel="stylesheet" href="css/forum_style.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body class="purple lighten-2">
 
-<div class="row purple lighten-2" id="header">
-<header>
-  <div class = "nav col s6 offset-2">
-    <a href = "/news"> <button class=" u-full-width white darken-1"> Newsroom </button> </a>
-    <a href = "/top-posts"> <button class="u-full-width white darken-1"> Top Posts </button> </a>
-    <a href = "/"> <button class=" u-full-width white darken-1"> Home  </button> </a>
+<div class="row" id="header">
+  <div class="nav col s6 offset-2">
+    <div class = "nav col s6 offset-2">
+      <a href = "/news"> <button class=" u-full-width"> Newsroom </button> </a>
+      <a href = "/top-posts"> <button class="u-full-width"> Top Posts </button> </a>
+      <a href = "/"> <button class=" u-full-width"> Home </button> </a>
+    </div>
   </div>
-
-  <div class="question col s6 offset-s3">
-    <h2> Question <br> of the <br> Week </h2>
-    <p> Where do you see the course of education heading in the next 10 years?</p>
-  </div>
-</header>
+    <div class="question col s6 offset-s3">
+      <h2> Question <br> of the <br> Week </h2>
+      <p> Where do you see the course of education heading in the next 10 years?</p>
+    </div>
 </div> <!--ends header  -->
 
 <div class="row">
-  <div class = "posting_block col s3 offset-s9 z-depth-3 hoverable">
-    <aside>
-
-      <a href="/logon"> <button> Log on </button> </a>
-      <div class = "question row">
-
-      </div>
-
       <div class="row">
-      <div class=" prompt col s12">
-        <p>Spread your ideas, young padawon.<br>
-            Let the free world hear your voice and rejoice.
-        </p>
-      </div>
+        <div class="prompt col s12">
+          <a href="/logon"> <button id="logon"> Log on </button> </a>
+          <p>Spread your ideas, young padawon.<br>
+              Let the free world hear your voice and rejoice.
+          </p>
+        </div>
       </div>
       {{#user}}
         <form class="col s12" method="POST" action="/posts">
@@ -65,25 +58,24 @@
 
         </form>
         {{/user}}
-    </aside>
   </div>
 </div> <!-- ends side column -->
 
 
-<div class="row">
+<div class="row" id="posts">
 {{#forum}}
-  <div class = "post_container col s7 offset-s2">
+  <div class="post_container col s7 offset-s2">
 
 
       <div class="row">
       <div class="col s6">
 
         <a href="/posts/{{id}}">
-          <h4 class="flow-text"> {{subject}} </h4>
+          <h4> {{subject}} </h4>
         </a>
 
-        <p id="ups" class="flow-text">
-          <a href="ups/{{id}}"> {{ups}} </a>
+        <p id="ups">
+          <a href="posts/{{id}}"> {{ups}} </a>
           <i class="ups-icon" class="materialize-icons"> call_merge </i>
           <a href="/user/{{users.username}}"> BY {{username}} </a>
         </p>
@@ -92,72 +84,24 @@
       </div>
 
       <!-- <div class="collapsible-body"> -->
-        <div class="row">
-          <p> {{body}} </p>
+        <div class="row post-body">
+          <h5> {{body}} </h5>
         </div>
 
-        <div class ="row">
+        <div class ="row comments">
         <p> {{comment}} </p>
         </div>
 
-        <div class="row1">
         <div class="commentary col s6 input-field">
             <form method="POST" action="/comment/{{id}}">
                <input name="comment">
                <button type="submit"> Comment </button>
             </form>
         </div>
-        </div>
-  </div>
+    </div>
          {{/forum}}
 
   </div>
- <!--  </div> --> <!-- ends post log -->
-
-<!--
-<div class="row">
-
-  <div class = "post_container col s7">
-    <div id="sidebar" class="col s3 purple lighten-2">
-    </div>
-      {{#forum}}
-      <div class="row">
-      <div class="col s6">
-
-        <a href="/posts/{{id}}">
-          <h4 class="flow-text left"> {{subject}} </h4>
-        </a>
-
-        <p class="flow-text"> {{ups}} {{/forum}} {{#user}} <a href="/user/{{id}}"> by  BY {{username}} </a> {{/user}}</p>
-
-      </div>
-      </div>
-      {{#forum}}
-
-        <div class="row">
-        <div class="col s6">
-          <p> {{posts.body}} </p>
-        </div>
-        </div>
-        {{/forum}}
-        {{#forum}}
-        <div class ="row">
-        <p> {{comment}} </p>
-        </div>
-        {{/forum}}
-        {{#forum}}
-        <div class="row1">
-        <div class="commentary col s6 input-field">
-            <form method="POST" action="/comment/{{id}}">
-               <input name="comment">
-               <button type="submit"> Comment </button>
-            </form>
-        </div>
-        </div>
-  </div>
-    {{/forum}}
-  </div>
-</div> ends post log -->
 
 <script src="js/jquery.js"></script>
 <script src="js/posts.js"></script>
