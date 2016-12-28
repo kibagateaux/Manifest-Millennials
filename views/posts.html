@@ -83,9 +83,9 @@
         </a>
 
         <p id="ups" class="flow-text">
-          <a href="ups/{{posts.id}}"> {{ups}} </a>
+          <a href="ups/{{id}}"> {{ups}} </a>
           <i class="ups-icon" class="materialize-icons"> call_merge </i>
-          <a href="/user/{{username}}"> BY {{username}} </a>
+          <a href="/user/{{users.username}}"> BY {{username}} </a>
         </p>
 
       </div>
@@ -102,7 +102,7 @@
 
         <div class="row1">
         <div class="commentary col s6 input-field">
-            <form method="POST" action="/comment/{{posts.id}}">
+            <form method="POST" action="/comment/{{id}}">
                <input name="comment">
                <button type="submit"> Comment </button>
             </form>

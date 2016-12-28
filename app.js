@@ -38,7 +38,7 @@ app.listen(port, function(){
 
 app.get('/',function(req,res){
   user = req.session.user
-  res.render('index', {'user': user});
+  res.redirect('/posts');
 });
 
 app.get('/logon', function(req, res){
