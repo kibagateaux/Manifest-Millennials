@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="css/forum_style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="purple lighten-2">
+<body>
 
-<div class="row purple lighten-2" id="header">
+<div class="row" id="header">
 <header>
   <div class = "nav col s6 offset-2">
-    <a href = "/news"> <button class=" u-full-width white darken-1"> Newsroom </button> </a>
-    <a href = "/top-posts"> <button class="u-full-width white darken-1"> Top Posts </button> </a>
-    <a href = "/"> <button class=" u-full-width white darken-1"> Home  </button> </a>
+    <a href = "/news"> <button class=" u-full-width"> Newsroom </button> </a>
+    <a href = "/top-posts"> <button class="u-full-width"> Top Posts </button> </a>
+    <a href = "/"> <button class=" u-full-width"> Home  </button> </a>
   </div>
 
   <div class="question col s6 offset-s3">
@@ -29,9 +29,8 @@
 
 <div class="row">
   <div class = "posting_block col s3 offset-s9 z-depth-3 hoverable">
-    <aside>
 
-      <a href="/logon"> <button> Log on </button> </a>
+      <a href="/logon"> <button id="logon"> Log on </button> </a>
       <div class = "question row">
 
       </div>
@@ -65,7 +64,6 @@
 
         </form>
         {{/user}}
-    </aside>
   </div>
 </div> <!-- ends side column -->
 

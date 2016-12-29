@@ -139,13 +139,18 @@ app.post('/posts', function(req,res){
     .then(function(data){
       res.render('posts', {'forum': data});
     });
-  });
+  })
+  .error(function(err){
+    throw err;
+  })
 });
 
 app.get('/posts/:id',function(req,res){
  var user = req.session.user;
  db.any(
   "SELECT * FROM posts, comments WHERE posts.id, post_id = $1",
+  // "SELECT * FROM posts, comments WHERE posts.id = $1 AND posts.id = post_id",
+  // "SELECT * FROM posts, comments WHERE posts.id = $1 OR post_id = $1",
   [req.params.id]
   )
  .then(function(data){

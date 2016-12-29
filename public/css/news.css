@@ -10,7 +10,7 @@ div.row#header{
   width: 100%;
 }
 
-div.row#header nav.nav{
+div.row#header nav{
   width: 35%;
   height: 65%;
   border-radius: 50%;
@@ -23,7 +23,7 @@ div.row#header nav.nav{
   text-align: center;
 }
 
-nav.nav a button{
+nav a button{
   font-family: "Bungee", cursive;
   position: relative;
   background: none;
@@ -36,24 +36,17 @@ nav.nav a button{
   margin: 20px auto;
 }
 
-div.row.source{
-  font-family: Bungee;
-}
 
 
 div.nav p{
   text-align: center;
   display: inline-block;
-  font-family: Bungee, cursive;
 }
 
 div.row div.question{
   font-size: 20px;
   text-overflow: hidden;
   text-align: left;
-}
-div.row div.question p{
- font-family: "Bungee Inline", cursive;
 }
 
 
@@ -62,17 +55,12 @@ div.source div.article{
   margin: 50px 20px 15px 50px;
 }
 
-/*div.row.purple#header div#dropdown-list.row.col.s12.dropdown-content{
-  width: 50%;
-  height: 100%;
-}*/
 
 div.source{
   text-align: center;
 }
 
 div.source div.article p{
-  font: 16px "Bungee Inline";
   text-align: left;
   padding: 20px;
   margin: 10px auto;
@@ -95,34 +83,21 @@ div.source div.article button{
 }
 
 div.nav#dropdown-menu{
-/*  position: absolute;
-  top: 5%;
-  left: 65%;*/
   display: inline-block;
 }
 
-/*div.nav#dropdown-menu button#search{
-  position: absolute;
-  top: 10%;
-
-}
-*/
-div.show{
-  animation: slideOut 0.5s;
-}
-
 div.hide{
-  animation: slideIn 0.5s;
+  animation: slideOut 0.5s;
 }
 
 div#drop-list{
   position: absolute;
   left: 75%;
   top: 10%;
+  background: rgba(255,255,255,0.8);
 }
 
 div#drop-list ul li{
-  font: 15px "Bungee Inline";
   margin: 5px auto;
 }
 
@@ -133,7 +108,6 @@ div#drop-list ul li:hover{
 
 
 button#search{
-  font-family: Bungee;
   margin-top: 60px;
   margin-left: -100px;
 }

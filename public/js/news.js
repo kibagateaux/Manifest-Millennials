@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
                     $('#' + article).append('<img class="col s4 responsive-image" id="' + image + '">');
                     $('#' + image).attr('src', image_url);
 
-                    $('#' + article).append('<a href="' + a.url + '">' +
+                    $('#' + article).append('<a href="' + a.url + '" target="_blank">' +
                         '<h4 class="title">' + a.title + '</h4>' +
                         '</a>');
                     $('#' + article).append('<p class="center-align">' + a.abstract + '</p>');
@@ -98,60 +98,53 @@ jQuery(document).ready(function($) {
 
     var $drop = $('#drop-list');
 
-    $("#search").mouseenter(function(){
-        console.log('showing now');
-        $drop.toggleClass('show');
-        // $drop.removeClass('hide'); //Change to Toggle Class
-        // $drop.addClass('show');
+    $("#search").on('click',function(e){
+        $drop.toggleClass('hide');
     });
 
-    $("#nav").mouseleave(function(){
+    $("#dropdown-menu").mouseleave(function(){
+        $drop.toggleClass('hide');
+    });
 
-        $drop.toggleClass('show');
-        console.log('closing now');
-        // $drop.removeClass('show');
-        // $drop.addClass('hide');
-      });
 
     getNews('bloomberg');
 
-
     $('#bloomberg').on('click', function() {
-        getNews('bloomberg')
+        getNews('bloomberg');
     });
     $('#ars-technica').on('click', function() {
-        getNews('ars-technica')
+        getNews('ars-technica');
     });
     $('#techcrunch').on('click', function() {
-        getNews('techcrunch')
+        getNews('techcrunch');
     });
     $('#hacker-news').on('click', function() {
-        getNews('hacker-news')
+        getNews('hacker-news');
     });
     $('#recode').on('click', function() {
-        getNews('recode')
+        getNews('recode');
     });
     $('#wall-street').on('click', function() {
-        getNews('the-wall-street-journal')
+        getNews('the-wall-street-journal');
     });
     $('#the-economist').on('click', function() {
-        getNews('the-economist')
+        getNews('the-economist');
     });
     $('#engadget').on('click', function() {
-        getNews('engadget')
+        getNews('engadget');
     });
     $('#business-insider').on('click', function() {
-        getNews('business-insider')
+        getNews('business-insider');
     });
     $('#fortune').on('click', function() {
-        getNews('fortune')
+        getNews('fortune');
     });
 
     $('#NYT-tech').on('click', function() {
-        getNYT('Technology')
+        getNYT('Technology');
     })
     $('#NYT-biz').on('click', function() {
-        getNYT('Business-Day')
+        getNYT('Business-Day');
     });
 
 
