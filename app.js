@@ -38,7 +38,7 @@ app.listen(port, function(){
 
 app.get('/',function(req,res){
   user = req.session.user
-  res.render('index', {'user': user});
+  res.redirect('/posts');
 });
 
 app.get('/logon', function(req, res){
@@ -123,6 +123,7 @@ app.get('/posts', function(req,res){
       console.log(postID, post_userID);
     // console.log(data)
     var forum = {'forum': data, 'user': user};
+    console.log("forum post id search", forum);
     res.render('posts', forum);
   });
 });
@@ -239,6 +240,5 @@ app.delete('/user/:name', function(req,res){
       res.redirect('/posts')
     });
 });
-
 
 
