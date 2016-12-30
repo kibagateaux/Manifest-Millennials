@@ -85,7 +85,21 @@
           <i class="ups-icon" class="materialize-icons"> call_merge </i>
           <a href="/user/{{users.username}}"> BY {{username}} </a>
         </p>
+        <form method="POST" action="/reaction/{{id}}"><!--
+          <input class="reaction" value="HAPPY 😀" name="happy"> -->
+          <input name="happy" value=" HAPPY 😀">
+          <input type="checkbox" name="sad" value=" HAPPY 😀">
+          <input type="checkbox" name="funny" value=" HAPPY 😀">
+          <input type="checkbox" name="bleh" value="AEFAEGWSWBSBSWB HAPPY 😀">
 
+<!--           <input class="reaction" value="INSPIRING 😀" name="inspiring">
+          <input class="reaction" value="FUNNY 😂" name="funny">
+          <input class="reaction" value="SAD 😭" name="sad">
+          <input class="reaction" value="FEAR 😱" name="fear">
+          <input class="reaction" value="THOUGHTFUL 🤓" name="thoughtful"> -->
+          <button type="submit"> REACT</button>
+
+        </form>
       </div>
       </div>
 

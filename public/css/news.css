@@ -92,8 +92,8 @@ div.hide{
 
 div#drop-list{
   position: absolute;
-  left: 75%;
-  top: 10%;
+  left: 65%;
+  top: 25%;
   background: rgba(255,255,255,0.8);
 }
 
