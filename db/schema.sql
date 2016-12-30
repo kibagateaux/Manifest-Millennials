@@ -5,9 +5,9 @@ DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS reactions;
 
-Add "tone" to posts
-Posts have reactions, from others
-tone nad reactions have same values,
+-- Add "tone" to posts
+-- Posts have reactions, from other users
+-- tone and reactions have same values,
 
 CREATE TABLE users(
   id serial PRIMARY KEY,
