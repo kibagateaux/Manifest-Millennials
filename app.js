@@ -112,12 +112,10 @@ app.get('/posts', function(req,res){
    // "SELECT posts.id, ups, subject, body, user_name, posts.user_id, comment FROM posts,comments"
    // "SELECT * FROM posts INNER JOIN comments ON (posts.id = post_id)"
    //"SELECT posts.id, posts.user_id, users.id FROM posts JOIN users on posts.user_id = users.id"
-   "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id)"
+   "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
    // "SELECT * FROM posts"
     ).then(function(data){
-      post_userID = data.user_id
-      postID = data.id
-      console.log(postID, post_userID);
+      console.log(data);
     var forum = {'forum': data, 'user': user};
     res.render('posts', forum);
   });
@@ -164,8 +162,6 @@ app.post('/posts/:id', function(req,res){
   var body = req.body.body;
   console.log(subject, body);
 
-   //How to differentiate between post and comment being posted from same page?
-   //^^form action=""
   db.none("INSERT INTO posts(subject, body, user_id) VALUES ($1,$2,$3)",
     [subject, body, user.id])
     .then(function(){
@@ -174,7 +170,7 @@ app.post('/posts/:id', function(req,res){
     .catch(function(req,res){
       res.send("You must log on in order to posy, my friend");
     });
-  //completion alert?
+  //add completion alert
 });
 
 app.get('/top-posts', function(req, res){
@@ -202,23 +198,26 @@ app.post('/comment/:id', function(req,res){
 });
 
 
-//user should be personal account user/:id will be public access
-app.get('/user', function(req,res){
+app.get('/users', function(req,res){
   res.send('You must log in to access your account buddy');
 })
 
-app.get('/user/:name', function(req,res){
+app.get('/users/:name', function(req,res){
     var user = req.session.user;
     db.any("SELECT * FROM posts WHERE user_name = $1",
       [req.params.name]
-    ).catch(function(){
-      res.send("YOU MUST LOG ON TO ACCESS YOUR PROFILE");
-    })
-      res.render('user', {'data': data, 'user': user});
+    )
+    // .catch(function(){
+    //   res.send("YOU MUST LOG ON TO ACCESS YOUR PROFILE");
+    // })
+    .then(function(data){
+      console.log(data);
+      res.render('users/show', {'data': data, 'user': user});
     });
+});
 
-// .update
-app.put('/user/:name', function(req,res){
+// .update?
+app.put('/users/:name', function(req,res){
   var update = req.body;
   var user = req.session.user;
   bcrypt.hash(update.password, 10, function(err, hash){
@@ -232,7 +231,7 @@ app.put('/user/:name', function(req,res){
   });
 });
 
-app.delete('/user/:name', function(req,res){
+app.delete('/users/:name', function(req,res){
   console.log("user deleted");
   db.one("DELETE FROM users,posts WHERE (users.id=$1 OR posts.users_id = $1)",
     [req.params.name])

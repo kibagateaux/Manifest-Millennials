@@ -72,17 +72,17 @@
 
 <div class="row">
 {{#forum}}
-  <div class = "post_container col s7 offset-s2">
+  <div class="post_container col s7 offset-s2">
 
 
       <div class="row">
       <div class="col s6">
 
         <a href="/posts/{{id}}">
-          <h4 class="flow-text"> {{subject}} </h4>
+          <h4 class="subject"> {{subject}} </h4>
         </a>
 
-        <p id="ups" class="flow-text">
+        <p id="ups">
           <a href="ups/{{posts.id}}"> {{ups}} </a>
           <i id="ups-icon" class="materialize-icons"> call_merge </i>
           <a href="/user/{{username}}"> BY {{username}} </a>
@@ -109,55 +109,8 @@
         </div>
         </div>
   </div>
-         {{/forum}}
-
-  </div>
- <!--  </div> --> <!-- ends post log -->
-
-<!--
-<div class="row">
-
-  <div class = "post_container col s7">
-    <div id="sidebar" class="col s3 purple lighten-2">
-    </div>
-      {{#forum}}
-      <div class="row">
-      <div class="col s6">
-
-        <a href="/posts/{{id}}">
-          <h4 class="flow-text left"> {{subject}} </h4>
-        </a>
-
-        <p class="flow-text"> {{ups}} {{/forum}} {{#user}} <a href="/user/{{id}}"> by  BY {{username}} </a> {{/user}}</p>
-
-      </div>
-      </div>
-      {{#forum}}
-
-        <div class="row">
-        <div class="col s6">
-          <p> {{posts.body}} </p>
-        </div>
-        </div>
-        {{/forum}}
-        {{#forum}}
-        <div class ="row">
-        <p> {{comment}} </p>
-        </div>
-        {{/forum}}
-        {{#forum}}
-        <div class="row1">
-        <div class="commentary col s6 input-field">
-            <form method="POST" action="/comment/{{id}}">
-               <input name="comment">
-               <button type="submit"> Comment </button>
-            </form>
-        </div>
-        </div>
-  </div>
-    {{/forum}}
-  </div>
-</div> ends post log -->
+{{/forum}}
+</div>
 
 <script src="js/jquery.js"></script>
 <script src="js/posts.js"></script>
