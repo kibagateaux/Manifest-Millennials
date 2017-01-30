@@ -48,6 +48,7 @@ app.get('/logon', function(req, res){
 
 app.post('/logon', function(req,res){
   var data = req.body;
+  console.log(data)
   console.log(data.email, data.password);
     db.one(
     "SELECT * FROM users WHERE email = $1",
@@ -82,10 +83,19 @@ app.post('/signup', function(req,res){
     db.none(
       "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
       [username, hash, email, school]
-    )
-    .then(function(){
-      res.render('logon');
-    });
+    ).then(db.one("SELECT * FROM users WHERE email = $1", [email])
+      .then(user => {
+        console.log("Loging in user after signup")
+        console.log('test'+user)
+        bcrypt.compare(password, user.hash, (err, cmp) => {
+          if(cmp){
+            req.session.user = user;
+            res.redirect('/posts');
+          } else {
+            res.send("User request could not be completed");
+          }
+        })
+      }))
   }); //ends Bcrypt
 }); //ends POST request
 
@@ -107,15 +117,16 @@ app.post('/news', function(req,res){
 
 app.get('/posts', function(req,res){
   var user = req.session.user;
+  console.log("Session User from Posts")
   console.log(user);
   db.any(
    // "SELECT posts.id, ups, subject, body, user_name, posts.user_id, comment FROM posts,comments"
    // "SELECT * FROM posts INNER JOIN comments ON (posts.id = post_id)"
    //"SELECT posts.id, posts.user_id, users.id FROM posts JOIN users on posts.user_id = users.id"
-   "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
-   // "SELECT * FROM posts"
+   // "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
+   "SELECT * FROM posts"
     ).then(function(data){
-      console.log(data);
+
     var forum = {'forum': data, 'user': user};
     res.render('posts', forum);
   });

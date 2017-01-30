@@ -25,9 +25,9 @@ CREATE TABLE posts(
   tone varchar(25),
   ups integer,
   user_name varchar(50) NOT NULL,
-  user_id integer REFERENCES users (id) NOT NULL,
-  stalk_id integer REFERENCES posts,
-  reaction integer REFERENCES reactions
+  user_id integer REFERENCES users (id) NOT NULL
+  -- stalk_id integer REFERENCES posts,
+  -- reaction integer REFERENCES reactions
 );
 
 
@@ -38,26 +38,26 @@ CREATE TABLE comments(
   post_id integer REFERENCES posts NOT NULL
 );
 
-CREATE TABLE reactions(
-  id serial PRIMARY KEY,
-  happy integer,
-  inspiring integer,
-  funny integer,
-  sad integer,
-  fear integer,
-  thoughtful integer,
-  post_id REFERENCES posts NOT NULL
-);
+-- CREATE TABLE reactions(
+--   id serial PRIMARY KEY,
+--   happy integer,
+--   inspiring integer,
+--   funny integer,
+--   sad integer,
+--   fear integer,
+--   thoughtful integer,
+--   post_id integer REFERENCES posts NOT NULL
+-- );
 
-CREATE TABLE tags(
-  id serial PRIMARY KEY,
-  tag varchar(20),
-  post_id integer REFERENCES posts
-);
+-- CREATE TABLE tags(
+--   id serial PRIMARY KEY,
+--   tag varchar(20),
+--   post_id integer REFERENCES posts
+-- );
 
-CREATE TABLE articles(
-  id serial PRIMARY KEY,
-  title varchar(255),
-  url varchar(255),
-  reader integer REFERENCES users
-)
+-- CREATE TABLE articles(
+--   id serial PRIMARY KEY,
+--   title varchar(255),
+--   url varchar(255),
+--   reader integer REFERENCES users
+-- )
