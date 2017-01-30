@@ -1,6 +1,11 @@
 *{
-  font-family:'Titillium Web' , cursive;
+  font-family: 'Titillium Web' , cursive;
+  font-weight: 600;
 }
+.nav button, .subject, h4{
+  font-family: 'Bungee', cursive;
+}
+
 body{
   background-color: #AB47BC;
 }
@@ -38,9 +43,7 @@ header{
   height: 100%;
   z-index: 100;
 }
-.prompt p{
-  font-size: 22px;
-}
+
 
 .posting_block textarea{
   height: 35%;
