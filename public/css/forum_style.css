@@ -1,16 +1,16 @@
 *{
-  font-family:'Bungee', 'Titillium Web' , cursive;
+  font-family:'Titillium Web' , cursive;
 }
 body{
   background-color: rgb(190,80,200);
 }
-div.row#header{
+#header{
   float:left;
   height: 10%;
   width: 100%;
 }
 
-div.row#header div.nav{
+#header .nav{
   width: 38%;
   height: 67%;
   border-radius: 50%;
@@ -23,7 +23,7 @@ div.row#header div.nav{
   text-align: center;
 }
 
-div.nav a button{
+.nav a button{
   position: relative;
   background: white;
   border: none;
@@ -37,17 +37,17 @@ div.nav a button{
   font-size: 110%;
 
 }
-div.nav p{
+.nav p{
   text-align: center;
   display: inline-block;
 }
 
-div.row div.question{
+.question{
   font-size: 20px;
   text-align: left;
 }
 
-div.row div.posting_block{
+.posting_block{
   position: fixed;
   float: right;
   background-color: white;
@@ -55,19 +55,19 @@ div.row div.posting_block{
   height: 100%;
   z-index: 100;
 }
-div.row div div.row div.prompt p{
+.prompt p{
   font-size: 22px;
 }
 
-div.row div.posting_block div.body.input_field textarea{
+.posting_block textarea{
   height: 35%;
 }
 
-div.row button.btn-floating{
+.btn-floating{
   text-align: fill;
   margin: 20px 10px 30px 10px;
 }
 
-div.row div.post_container{
+.post_container{
   background-color: white;
 }
