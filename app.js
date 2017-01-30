@@ -48,7 +48,7 @@ app.get('/logon', function(req, res){
 
 app.post('/logon', function(req,res){
   var data = req.body;
-  console.log(data)
+  console.log("Logon data")
   console.log(data.email, data.password);
     db.one(
     "SELECT * FROM users WHERE email = $1",
@@ -83,20 +83,11 @@ app.post('/signup', function(req,res){
     db.none(
       "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
       [username, hash, email, school]
-    ).then(db.one("SELECT * FROM users WHERE email = $1", [email])
-      .then(user => {
-        console.log("Loging in user after signup")
-        console.log('test'+user)
-        bcrypt.compare(password, user.hash, (err, cmp) => {
-          if(cmp){
-            req.session.user = user;
-            res.redirect('/posts');
-          } else {
-            res.send("User request could not be completed");
-          }
-        })
-      }))
-  }); //ends Bcrypt
+    )
+    .then(app.post('/logon', function(req, res){
+        req.body = {email: email, password: password}
+    }))
+  });
 }); //ends POST request
 
 
