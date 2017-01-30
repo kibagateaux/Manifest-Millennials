@@ -1,12 +1,16 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-*{
-  font-family: 'Bungee', cursive;
+
+
+  #signup-form{
+    height: 57%;
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(250,250,250,0.2);
+    box-shadow: 25px gray;
+  }
+
+#signup-form:hover{
+  color: purple;
+  background-color: rgba(255,255,255,1);
 }
 nav ul a,
 nav .brand-logo {
