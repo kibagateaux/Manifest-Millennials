@@ -2,49 +2,33 @@
   font-family:'Titillium Web' , cursive;
 }
 body{
-  background-color: rgb(190,80,200);
+  background-color: #AB47BC;
 }
-#header{
-  float:left;
-  height: 10%;
+
+header{
   width: 100%;
+  float: left;
+  height: 200px;
+  margin: 0px auto;
+}
+.row{
+  margin: 0px auto;
 }
 
-#header .nav{
-  width: 38%;
-  height: 60%;
-  top: -25%;
-  left: -15%;
-  position: absolute;
-  background-color: purple;
-  margin: 50px 0px 50px;
-  padding: 50px auto;
-  text-align: center;
+.nav{
+  background-color: #8E24AA;
+  height: 100%;
+}
+.nav button:first-child{
+  margin-top: 15px;
+}
+.nav button{
+  background-color: black;
+  display: flex;
+ justify-content: space-around;
+  margin: 10px auto;
 }
 
-.nav a button{
-  position: relative;
-  background: white;
-  border: none;
-  top: 200px;
-  left: 100px;
-  color: black;
-  display: block;
-  border-radius: 7px;
-  margin: 40px auto;
-  height: 30px;
-  font-size: 110%;
-
-}
-.nav p{
-  text-align: center;
-  display: inline-block;
-}
-
-.question{
-  font-size: 20px;
-  text-align: left;
-}
 
 .posting_block{
   position: fixed;

@@ -84,6 +84,7 @@ app.post('/signup', function(req,res){
       "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
       [username, hash, email, school]
     )
+    //sends signup data for automatic login
     .then(app.post('/logon', function(req, res){
         req.body = {email: email, password: password}
     }))
