@@ -17,7 +17,7 @@
     <a href="/top-posts" class="row"> <button class="btn col s12 m12 black"> Top Posts </button> </a>
   </div>
   <div id="question" class="center-align col s9 m6 valign-wrapper">
-    <h4> Where do you see the course of education heading in the next ten years?</h4>
+    <h2 class="flow-text"> Where do you see the course of education heading in the next ten years?</h2>
   </div>
 </header>
 
@@ -25,9 +25,11 @@
 <div class="row">
   <div class = "posting_block col s3 offset-s9 z-depth-3 hoverable">
 
-  <a href="/logon">
-    <button id="logon" class="btn col s12 black"> Log on </button>
-  </a>
+    {{#isLoggedOut}}
+      <a href="/logon">
+        <button id="logon" class="btn col s12 black"> Log on </button>
+      </a>
+    {{/isLoggedOut}}
 
   <div class="row">
   <div class="prompt col s12">
@@ -54,7 +56,7 @@
      </div>
      </div>
 
-     <button class="btn-floating col s6 offset-s3" type="submit"> post </button>
+     <button class="btn col s6 offset-s3 black" type="submit"> post </button>
 
     </form>
   {{/user}}
@@ -84,13 +86,13 @@
       </div>
 
 
-        <div class="row">
-          <p> {{body}} </p>
-        </div>
+      <div class="row">
+        <p> {{body}} </p>
+      </div>
 
-        <div class ="row">
-        <p> {{comment}} </p>
-        </div>
+      <div class ="row">
+      <p> {{comment}} </p>
+      </div>
 
 <!--   <form method="POST" action="/reaction/{{id}}">
           <input class="reaction" value="HAPPY 😀" name="happy">

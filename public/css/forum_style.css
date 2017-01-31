@@ -24,7 +24,6 @@ header{
 
 .nav{
   background-color: #8E24AA;
-  height: 100%;
 }
 
 .nav button:first-child{
@@ -45,12 +44,9 @@ header{
   z-index: 100;
 }
 
-.btn-floating{
-  text-align: fill;
-  margin: 20px 10px 30px 10px;
-}
 
 .post_container{
+  height: 30%;
   margin-bottom: 10px;
   background-color: white;
 }
@@ -62,6 +58,7 @@ header{
   font: 10px;
 }
 .commentary{
+  margin-bottom: 20px;
   padding: 20px auto;
 }
 

@@ -53,18 +53,23 @@ app.post('/logon', function(req,res){
     db.one(
     "SELECT * FROM users WHERE email = $1",
     [data.email]
-    ).catch(function(){
-      res.send("User request could not be completed");
-    }).then(function(user){
+    ).then(function(user){
       console.log(user);
       bcrypt.compare(data.password, user.hash, function(err, cmp){
+          console.log(cmp)
           if(cmp){
             req.session.user = user;
             res.redirect('/posts');
+            console.log("session has been created")
           } else {
-            res.send("User request could not be completed");
+            console.log(err)
+            res.send("Error in comporator");
           }
     });
+  })
+  .catch((err) => {
+    console.log(err)
+    res.send("User request could not be completed");
   });
 });
 
@@ -116,7 +121,14 @@ app.get('/posts', function(req,res){
    // "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
    "SELECT * FROM posts"
     ).then(function(data){
-    var forum = {'forum': data, 'user': user};
+
+      console.log("Is there a user");
+      console.log(session.user);
+      console.log("Is there not a user?")
+      console.log(!session.user);
+
+      (!session.user)? (isLoggedOut = true) : (isLoggedOut = false)
+    var forum = {'forum': data, 'user': user, isLoggedOut: isLoggedOut};
     console.log("Data being rendered from posts")
     console.log(forum)
     res.render('posts', forum);
@@ -135,12 +147,9 @@ app.post('/posts', function(req,res){
   db.none("INSERT INTO posts(subject, body, user_name, user_id) VALUES ($1,$2,$3,$4)",
     [subject, body, username, user.id])
   .then(function(){
-    db.many("SELECT * FROM posts LEFT OUTER JOIN comments ON (post_id = posts.id)")
-    .then(function(data){
-      res.render('posts', {'forum': data});
-    });
-  })
-  .error(function(err){
+      res.redirect('/posts');
+    })
+  .catch(function(err){
     throw err;
   })
 });
@@ -203,7 +212,7 @@ app.post('/comment/:id', function(req,res){
   var comment = req.body.comment;
   var post_id = req.params.id;
   console.log(comment, post_id);
-  db.none("INSERT INTO comments(body, post_id, user_id) VALUES ($1,$2,$3)",
+  db.none("INSERT INTO comments(comment, post_id, user_id) VALUES ($1,$2,$3)",
     [comment, post_id, user.id])
   .then(function(){
     res.redirect('/posts')
