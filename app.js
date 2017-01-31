@@ -75,8 +75,8 @@ app.post('/signup', function(req,res){
   var password = data.password;
   var username = data.username;
   var school = data.school;
-  //use ES6 deconstructing
-  //{email, password, username, school} = req.body
+  // use ES6 deconstructing
+  // {email, password, username, school} = req.body
   console.log(email, password, username, school);
 
   bcrypt.hash(password, 10, function(err, hash){
@@ -111,10 +111,10 @@ app.get('/posts', function(req,res){
   console.log(user);
   db.any(
    // "SELECT posts.id, ups, subject, body, user_name, posts.user_id, comment FROM posts,comments"
-   // "SELECT * FROM posts INNER JOIN comments ON (posts.id = post_id)"
+    "SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups"
    //"SELECT posts.id, posts.user_id, users.id FROM posts JOIN users on posts.user_id = users.id"
    // "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
-   "SELECT * FROM posts"
+   // "SELECT * FROM posts"
     ).then(function(data){
 
     var forum = {'forum': data, 'user': user};
@@ -144,16 +144,27 @@ app.post('/posts', function(req,res){
   })
 });
 
-app.get('/posts/:id',function(req,res){
+app.get('/posts/:id', function(req,res){
  var user = req.session.user;
- db.any(
-  "SELECT * FROM posts, comments WHERE posts.id, post_id = $1",
+ db.one(
+  "SELECT * FROM posts WHERE id = $1",
+  // "SELECT * FROM posts, comments WHERE posts.id, post_id = $1",
+  // "SELECT * FROM posts INNER JOIN comments ON (post_id = $1 AND (posts.id = $1 OR posts.id = post_id))",
   // "SELECT * FROM posts, comments WHERE posts.id = $1 AND posts.id = post_id",
   // "SELECT * FROM posts, comments WHERE posts.id = $1 OR post_id = $1",
   [req.params.id]
   )
  .then(function(data){
-  res.render('posts', {'forum':data, 'user':user});
+  const post = data
+  console.log(post);
+  db.any(
+    "SELECT * FROM comments WHERE post_id = $1",
+    [post.id]
+  ).then(function(comments){
+    let data = {'post':post, 'user':user, 'comments':comments};
+    console.log(data);
+    res.render('post', data);
+  })
  });
 });
 
@@ -176,7 +187,7 @@ app.post('/posts/:id', function(req,res){
 
 app.get('/top-posts', function(req, res){
   var user = req.session.user;
-  db.any("SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups ASC")
+  db.any("SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups")
   .then(function(data){
     console.log(data);
     // res.render('top', {'post': data});

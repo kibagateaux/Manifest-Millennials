@@ -1,0 +1,61 @@
+*{
+  font-family: 'Ubuntu', sans-serif;
+  // Shkoder 1989 ,
+  font-weight: bold;
+  margin: 0px auto;
+}
+div .row{
+  margin: 0px auto;
+}
+button.btn, .subject, h4{
+  font-family: 'Playfair Display', cursive;
+  font-weight: 700;
+}
+
+body{
+  background-color: #AB47BC;
+}
+
+header{
+  width: 100%;
+  float: left;
+  height: 200px;
+  margin: 0px auto;
+}
+
+.nav{
+  background-color: #8E24AA;
+  height: 100%;
+}
+.nav button:first-child{
+  margin-top: 15px;
+}
+.nav button{
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px auto;
+}
+
+.post{
+  padding: 10px auto;
+}
+
+#ups{
+  display: inline-block;
+  font-size: 100%;
+}
+
+h4{
+  display: inline-block;
+}
+
+.comments{
+  margin: 50px auto;
+}
+
+a{
+  background-color: green;
+  color: black;
+  text-decoration: none;
+}

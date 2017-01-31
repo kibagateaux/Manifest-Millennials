@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS tags;
-DROP TABLE IF EXISTS articles;
+-- DROP TABLE IF EXISTS tags;
+-- DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS reactions;
+-- DROP TABLE IF EXISTS reactions;
 
 -- Add "tone" to posts
 -- Posts have reactions, from other users
@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS reactions;
 
 CREATE TABLE users(
   id serial PRIMARY KEY,
+  name varchar(100),
   username varchar(50) UNIQUE NOT NULL,
   hash varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL,
@@ -25,8 +26,8 @@ CREATE TABLE posts(
   tone varchar(25),
   ups integer,
   user_name varchar(50) NOT NULL,
-  user_id integer REFERENCES users (id) NOT NULL
-  -- stalk_id integer REFERENCES posts,
+  user_id integer REFERENCES users NOT NULL,
+  stalk_id integer REFERENCES posts
   -- reaction integer REFERENCES reactions
 );
 

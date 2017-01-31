@@ -4,20 +4,74 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="/css/post.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu|Playfair+Display" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 </head>
 <body>
+<div class="row">
 
-
-  <div class ="container">
-  {{#post}}
-    <h2> {{subject}} </h2>
-  {{/post}}
-
-{{#post}}
-    <p> {{body}} </p>
-  {{/post}}
-
+  <header class="row">
+    <div class="nav col s6 m3">
+      <a href="/news" class="row"> <button class="btn col s12 m12 "> Newsroom </button> </a>
+      <a href="/posts" class="row"> <button class="btn col s12 m12 "> Home  </button> </a>
+      <a href="/top-posts" class="row"> <button class="btn col s12 m12 "> Top Posts </button> </a>
     </div>
+    <div id="question" class="center-align col s6 m6">
+      <h4 class="light"> Where do you see the course of education heading in the next ten years?</h4>
+    </div>
+  </header>
+
+  {{#post}}
+
+  <div class="post white left col s12 m6 offset-m2">
+
+    <div class="row">
+      <div class="col s12">
+
+        <a href="/posts/{{id}}">
+          <h4 class="flow-text subject black-text"> {{subject}} </h4>
+          <span id="ups" class="flow-text black-text">{{ups}}</span>
+        </a>
+
+        <a class="black-text" href="/user/{{user_name}}"> by {{user_name}} </a>
+
+      </div>
+    </div>
+
+    <div class="row left">
+      <p> {{body}} </p>
+    </div>
+
+  </div>
+
+  {{/post}}
+
+  <div class="comments right col s12 m6">
+
+    {{#comments}}
+
+      <div class ="row black comment">
+        <a href="/users/{{user_id}}">
+          <p class="white-text" > {{comment}} </p>
+        </a>
+      </div>
+
+    {{/comments}}
+
+    <div class="row">
+      <div class="commentary">
+        <form method="POST" action="/comment/{{id}}">
+           <input placeholder="Comment" name="comment">
+           <button class="btn black white-text" type="submit"> Comment </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script src="/js/jquery.js" type="text/javascript"></script>
+<script src="/js/posts.js"></script>
 </body>
 </html>

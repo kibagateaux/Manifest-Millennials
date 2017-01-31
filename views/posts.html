@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>COMMUNITY BOARD</title>
+  <title>SCHMINII</title>
   <link href="https://fonts.googleapis.com/css?family=Bungee|Titillium+Web" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link rel="stylesheet" href="css/forum_style.css">
@@ -15,7 +15,6 @@
   <div class="nav col s6 m3">
     <a href="/news" class="row"> <button class="btn col s12 m12 "> Newsroom </button> </a>
     <a href="/top-posts" class="row"> <button class="btn col s12 m12 "> Top Posts </button> </a>
-    <a href="/" class="row"> <button class="btn col s12 m12 "> Home  </button> </a>
   </div>
   <div id="question" class="center-align col s6 m6">
     <h4> Where do you see the course of education heading in the next ten years?</h4>
@@ -26,7 +25,9 @@
 <div class="row">
   <div class = "posting_block col s3 offset-s9 z-depth-3 hoverable">
 
-  <a href="/logon" class="center-align"> <button id="logon"> Log on </button> </a>
+  <a href="/logon" class="">
+    <button id="logon" class="btn center"> Log on </button>
+  </a>
 
   <div class="row">
   <div class="prompt col s12">
@@ -74,8 +75,7 @@
         </a>
 
         <p id="ups" class="flow-text">
-          <a href="ups/{{id}}"> {{ups}} </a>
-          <i class="ups-icon" class="materialize-icons"> call_merge </i>
+          <a href="/posts/{{id}}"> {{ups}} </a>
           <a href="/user/{{username}}"> BY {{username}} </a>
         </p>
         <form method="POST" action="/reaction/{{id}}"><!--
