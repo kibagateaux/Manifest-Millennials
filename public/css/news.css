@@ -1,6 +1,12 @@
 *{
-  font-family:'Bungee', cursive;
+  font-family:'Ubuntu', cursive;
 }
+
+button.btn, .subject, h2{
+  font-family: 'Playfair Display', cursive;
+  font-weight: 600;
+}
+
 body {
   background-color: purple;
  }
@@ -37,6 +43,7 @@ header{
 
 
 .article{
+  padding: 100em auto;
   margin: 50px 20px 15px 50px;
 }
 

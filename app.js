@@ -37,7 +37,7 @@ app.listen(port, function(){
 
 const handlePostgresError = (err) => {
   console.log("Handle Error Triggered")
-  console.log(err)
+  console.log(err.code)
   switch(err.code){
     case "23505":
       return "Username is already taken."
@@ -51,6 +51,8 @@ const handlePostgresError = (err) => {
       return "You are not authorized"
     case "P0002":
       return "No data found, please try again later"
+    case "22P02":
+      return "Invalid input, please check that your information is correct"
     case "queryResultErrorCode.noData":
       return "Invalid email and password combination"
     default:
@@ -105,14 +107,15 @@ app.post('/signup', function(req,res){
       "INSERT INTO users (username, hash, email, school, age) VALUES ($1, $2, $3, $4, $5)",
       [username, hash, email, school, age]
     )
-    .then( res.redirect('/logon') )
     .catch(err => {
 
       console.log("Signup POST catch")
       console.log(handlePostgresError(err));
       res.send(handlePostgresError(err));
 
-    });
+    })
+    .then( res.redirect('/logon') )
+
  });
 }); //ends POST request
 
@@ -124,11 +127,11 @@ app.get('/news', function(req,res){
 
 app.post('/news', function(req,res){
   //save data to invisible form
-  news = req.body;
-  user = req.session.user;
+  let news = req.body;
+  let user = req.session.user;
   console.log(req.body);
-  db.none("INSERT INTO articles(title, url, reader) VALUES ($1,$2, 1)",
-    [news.title, news.url])
+  db.none("INSERT INTO articles(title, url, reader) VALUES ($1,$2, $3)",
+    [news.title, news.url, user.id])
   .then(res.redirect('/news'));
 });
 

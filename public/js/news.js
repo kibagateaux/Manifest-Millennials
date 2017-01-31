@@ -1,6 +1,5 @@
 jQuery(document).ready(function($) {
     console.log('loaded');
-
     var body = $('body');
     var $img = $('.img');
     var $title = $('.title');
@@ -21,17 +20,17 @@ jQuery(document).ready(function($) {
 
             $('.source').append('<div class="col s8 article offset-s2" id="' + article + '"></div>');
 
-            $('#' + article).append('<img class="col s4 responsive-image" id="' + image + '">');
+            $('#' + article).append('<img class="col s12 responsive-image" id="' + image + '">');
             $('#' + image).attr('src', a[i].urlToImage);
 
             $('#' + article).append('<a href="' + a[i].url + '">' +
-                '<h4 class="title">' + a[i].title + '</h4>' +
+                '<h4 class="title col s12">' + a[i].title + '</h4>' +
                 '</a>');
             $('#' + article).append('<p class="center-align">' + a[i].description + '</p>');
             $('#' + article).append('<form class="fave " method="POST" action="/news">' +
                 '<input class="hide" name="title" value=' + toString(a[i].title) + '>' +
                 '<input class="hide" name="url" value=' + a[i].url + '>' +
-                '<button class="save btn red" type="submit" > Save </button> </form>');
+                '<button class="save btn black" type="submit" > Save </button> </form>');
         }
     };
 

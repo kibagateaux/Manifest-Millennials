@@ -1,5 +1,5 @@
 -- DROP TABLE IF EXISTS tags;
--- DROP TABLE IF EXISTS articles;
+DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS users;
@@ -57,9 +57,9 @@ CREATE TABLE comments(
 --   post_id integer REFERENCES posts
 -- );
 
--- CREATE TABLE articles(
---   id serial PRIMARY KEY,
---   title varchar(255),
---   url varchar(255),
---   reader integer REFERENCES users
--- )
+CREATE TABLE articles(
+  id serial PRIMARY KEY,
+  title varchar(255),
+  url varchar(255),
+  reader integer REFERENCES users
+)
