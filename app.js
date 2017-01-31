@@ -111,13 +111,14 @@ app.get('/posts', function(req,res){
   console.log(user);
   db.any(
    // "SELECT posts.id, ups, subject, body, user_name, posts.user_id, comment FROM posts,comments"
-    "SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups"
+    // "SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups"
    //"SELECT posts.id, posts.user_id, users.id FROM posts JOIN users on posts.user_id = users.id"
    // "SELECT * FROM posts LEFT OUTER JOIN comments ON (comments.post_id = posts.id) LIMIT 5"
-   // "SELECT * FROM posts"
+   "SELECT * FROM posts"
     ).then(function(data){
-
     var forum = {'forum': data, 'user': user};
+    console.log("Data being rendered from posts")
+    console.log(forum)
     res.render('posts', forum);
   });
 });

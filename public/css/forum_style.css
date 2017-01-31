@@ -1,52 +1,48 @@
 *{
-  font-family: 'Titillium Web' , cursive;
-  font-weight: 600;
+  font-family: 'Ubuntu' , cursive;
 }
-.nav button, .subject, h4{
-  font-family: 'Bungee', cursive;
+
+button.btn, .subject, h4{
+  font-family: 'Playfair Display', cursive;
+  font-weight: 600;
 }
 
 body{
-  background-color: #AB47BC;
+  background: url('/img/geometricbackground-purple.jpg');
+}
+
+.row{
+  margin: 0px auto;
 }
 
 header{
-  width: 100%;
   float: left;
-  height: 200px;
+  height: 30%;
   margin: 0px auto;
-}
-.row{
-  margin: 0px auto;
+  background-color: #AB47BC;
 }
 
 .nav{
   background-color: #8E24AA;
   height: 100%;
 }
+
 .nav button:first-child{
   margin-top: 15px;
 }
+
 .nav button{
-  background-color: black;
   display: flex;
- justify-content: space-around;
+  justify-content: space-around;
   margin: 10px auto;
 }
 
-
 .posting_block{
   position: fixed;
-  float: right;
   background-color: white;
   box-shadow: 25px gray;
   height: 100%;
   z-index: 100;
-}
-
-
-.posting_block textarea{
-  height: 35%;
 }
 
 .btn-floating{
@@ -55,5 +51,17 @@ header{
 }
 
 .post_container{
+  margin-bottom: 10px;
   background-color: white;
 }
+
+.subject{
+  float: left;
+}
+#ups a{
+  font: 10px;
+}
+.commentary{
+  padding: 20px auto;
+}
+

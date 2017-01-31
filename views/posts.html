@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SCHMINII</title>
-  <link href="https://fonts.googleapis.com/css?family=Bungee|Titillium+Web" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Ubuntu|Playfair+Display" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link rel="stylesheet" href="css/forum_style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,11 +12,11 @@
 <body>
 
 <header class="row">
-  <div class="nav col s6 m3">
-    <a href="/news" class="row"> <button class="btn col s12 m12 "> Newsroom </button> </a>
-    <a href="/top-posts" class="row"> <button class="btn col s12 m12 "> Top Posts </button> </a>
+  <div class="nav col s9   m2">
+    <a href="/news" class="row"> <button class="btn col s12 m12 black"> Newsroom </button> </a>
+    <a href="/top-posts" class="row"> <button class="btn col s12 m12 black"> Top Posts </button> </a>
   </div>
-  <div id="question" class="center-align col s6 m6">
+  <div id="question" class="center-align col s9 m6 valign-wrapper">
     <h4> Where do you see the course of education heading in the next ten years?</h4>
   </div>
 </header>
@@ -25,8 +25,8 @@
 <div class="row">
   <div class = "posting_block col s3 offset-s9 z-depth-3 hoverable">
 
-  <a href="/logon" class="">
-    <button id="logon" class="btn center"> Log on </button>
+  <a href="/logon">
+    <button id="logon" class="btn col s12 black"> Log on </button>
   </a>
 
   <div class="row">
@@ -64,11 +64,12 @@
 
 <div class="row">
 {{#forum}}
-  <div class="post_container col s7 offset-s3">
+  <div class="row">
+  <div class="post_container col s6 offset-s2">
 
 
       <div class="row">
-      <div class="col s6">
+      <div class="col s12">
 
         <a href="/posts/{{id}}">
           <h4 class="flow-text subject"> {{subject}} </h4>
@@ -76,27 +77,13 @@
 
         <p id="ups" class="flow-text">
           <a href="/posts/{{id}}"> {{ups}} </a>
-          <a href="/user/{{username}}"> BY {{username}} </a>
+          <a href="/user/{{user_name}}"> BY {{user_name}} </a>
         </p>
-        <form method="POST" action="/reaction/{{id}}"><!--
-          <input class="reaction" value="HAPPY 😀" name="happy"> -->
-          <input name="happy" value=" HAPPY 😀">
-          <input type="checkbox" name="sad" value=" HAPPY 😀">
-          <input type="checkbox" name="funny" value=" HAPPY 😀">
-          <input type="checkbox" name="bleh" value="AEFAEGWSWBSBSWB HAPPY 😀">
 
-<!--      <input class="reaction" value="INSPIRING 😀" name="inspiring">
-          <input class="reaction" value="FUNNY 😂" name="funny">
-          <input class="reaction" value="SAD 😭" name="sad">
-          <input class="reaction" value="FEAR 😱" name="fear">
-          <input class="reaction" value="THOUGHTFUL 🤓" name="thoughtful"> -->
-          <button type="submit"> REACT</button>
-
-        </form>
       </div>
       </div>
 
-      <!-- <div class="collapsible-body"> -->
+
         <div class="row">
           <p> {{body}} </p>
         </div>
@@ -105,7 +92,21 @@
         <p> {{comment}} </p>
         </div>
 
-        <div class="row1">
+<!--   <form method="POST" action="/reaction/{{id}}">
+          <input class="reaction" value="HAPPY 😀" name="happy">
+          <input name="happy" value=" HAPPY 😀">
+          <input type="checkbox" name="sad" value=" HAPPY 😀">
+          <input type="checkbox" name="funny" value=" HAPPY 😀">
+          <input type="checkbox" name="bleh" value="AEFAEGWSWBSBSWB HAPPY 😀">
+          <input class="reaction" value="INSPIRING 😀" name="inspiring">
+          <input class="reaction" value="FUNNY 😂" name="funny">
+          <input class="reaction" value="SAD 😭" name="sad">
+          <input class="reaction" value="FEAR 😱" name="fear">
+          <input class="reaction" value="THOUGHTFUL 🤓" name="thoughtful">
+          <button type="submit"> REACT</button>
+        </form> -->
+
+        <div class="row">
         <div class="commentary col s6 input-field">
             <form method="POST" action="/comment/{{id}}">
                <input name="comment">
@@ -113,6 +114,7 @@
             </form>
         </div>
         </div>
+  </div>
   </div>
          {{/forum}}
 

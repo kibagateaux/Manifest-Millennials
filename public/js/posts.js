@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
   console.log("loaded");
+   $('.parallax').parallax();
   var $ups = $('#ups');
   var ups = $('#ups').text().split(' ')[0];
   var $upsButton = $('#ups-icon');
