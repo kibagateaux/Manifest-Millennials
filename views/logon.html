@@ -5,57 +5,47 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Manifest Millenials</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Bungee+Shade" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee|Titillium+Web" rel="stylesheet">
   <link rel="stylesheet" href="css/logon.css">
 </head>
 <body>
 
 <div class="container row">
-  <!-- <div class="row "> -->
 
-    <form method="POST" action="/logon">
 
-  <div id="logon">
+  <form method="POST" action="/logon">
+    <div id="logon">
+
+     <div class="row">
+     <div class="col s12 m6 offset-m3 input-field">
+           <input placeholder="Email" class="validate" id="email" name="email">
+           <!-- <label for="email"> Email </label> -->
+     </div>
+     </div>
 
      <div class="row">
      <div class="col s6 offset-s3 input-field">
-           <input class="validate" id="email" name="email">
-           <label for="email"> Email </label>
+        <input placeholder="Password" class="validate" id="password" name="password">
+        <!-- <label for="password"> Password </label> -->
      </div>
      </div>
-
-      <div class="row">
-      <div class="col s6 offset-s3 input-field">
-          <input class="validate" id="password" name="password">
-          <label for="password"> Password </label>
-      </div>
-      </div>
 
     </div>
 
 
-      <div class="row">
+    <div class="row">
         <!-- <div class=" col s2 offset-s7"> -->
         <div class="u-full-width center-align">
-          <button class="btn-large red lighten-1 center-align" type="submit"> Log-On </button>
+          <button class="btn-large white purple-text center-align" type="submit"> Log-On </button>
         </div>
-      </div>
+    </div>
   </form>
 
-      <div class="row">
-        <div class="u-full-width center-align">
-          <button id="guest" class="btn-large purple lighten-1">
-            <a href="/posts"> Guest Log-On </a>
-          </button>
-         </div>
-      </div>
-
-
-  <div class="container collapsible popout" id="signup" data-collapsible="accordion">
+  <div id="signup">
 
     <div class="row">
       <div class="u-full-width center-align ">
-          <button class="btn-large red lighten-1">
+          <button class="btn-large white purple-text">
           Create Account
           </button>
         </div>
@@ -66,36 +56,46 @@
 
       <div class="row">
       <div class="input-field col s6 offset-s3">
-           <input class="validate" id="username" name="username">
-           <label for="username"> Username </label>
+           <input placeholder="Username" class="validate" id="username" name="username">
       </div>
       </div>
 
       <div class="row">
       <div class="input-field col s6 offset-s3 ">
-          <input class="validate" id="password" name="password">
-          <label for="password"> Password </label>
+          <input placeholder="Password" class="validate" id="password" name="password">
       </div>
       </div>
 
      <div class="row">
       <div class="input-field col s6 offset-s3 ">
-          <input class="validate" id="email" name="email">
-          <label for="email"> Email </label>
+          <input placeholder="Email" class="validate" id="email" name="email">
       </div>
       </div>
 
       <div class="row">
       <div class="input-field col s6 offset-s3 ">
-          <input class="validate" id="school" name="school">
-          <label for="school"> School </label>
+          <input placeholder="School" class="validate" id="school" name="school">
       </div>
       </div>
 
       <div class="row">
-      <div class="right u-full-width">
+      <div class="input-field col s6 offset-s3 ">
+          <input placeholder="Age" class="validate" id="age" name="age">
+      </div>
+      </div>
+
+      <div class="row">
+      <div class="input-field col s6 offset-s3 ">
+          <input placeholder="University" class="validate" id="school" name="school">
+      </div>
+      </div>
+
+
+
+      <div class="row">
+      <div class="center u-full-width">
           <a href="/signup">
-            <button class="btn-large red lighten-1" type="submit"> Join Now </button>
+            <button class="btn-large white purple-text" type="submit"> Join Now </button>
           </a>
       </div>
       </div>

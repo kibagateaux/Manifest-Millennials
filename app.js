@@ -81,13 +81,11 @@ app.post('/signup', function(req,res){
 
   bcrypt.hash(password, 10, function(err, hash){
     db.none(
-      "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
-      [username, hash, email, school]
+      "INSERT INTO users (username, hash, email) VALUES ($1, $2, $3)",
+      [username, hash, email]
     )
     //sends signup data for automatic login
-    .then(app.post('/logon', function(req, res){
-        req.body = {email: email, password: password}
-    }))
+    .then(res.redirect('/logon'))
   });
 }); //ends POST request
 

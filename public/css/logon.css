@@ -1,39 +1,27 @@
 body{
-  background-image: url("/../img/ivy-league-backdrop.jpg");
+  background-image: url("../img/login-background.jpeg");
 }
-div.container div.row{
-  font-family: 'Bungee Inline', cursive;
-}
-
-div.container.row {
-  background-color: rgba(250,0,0, 0.7);
+*{
+  font-family: 'Bungee', cursive;
 }
 
-div.container div#logon{
+.container {
+  height: 100%;
+  background-color: rgba(0,0,0, 0.7);
+}
+
+#logon{
+  position: relative;
   margin-top: 15%;
 }
-
-div.container div#signup{
-  margin-top: 15%;
-  border: red dotted 3px;
+input{
+  color: white;
+}
+#signup{
+  margin-top: 20%;
 }
 
-button.btn-large.col.s3 {
-  border-radius: 12px;
-  font-size: 2em;
-  display: inline-block;
-  padding: 30px;
-  /*padding: 50px;*/
-  /*margin:20px auto;*/
-}
-
-
-div.row a{
+a{
   text-decoration: none;
   font: white;
-}
-
-div.row div.u-full-width button.purple #guest {
-  font-color: black;
-  text-decoration: none;
 }
