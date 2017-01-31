@@ -4,69 +4,51 @@
 body {
   background-color: purple;
  }
-div.row#header{
-  float:left;
-  height: 10%;
-  width: 100%;
+
+.row{
+  margin: 0px auto;
 }
 
-div.row#header nav{
-  width: 35%;
-  height: 65%;
-  border-radius: 50%;
-  top: -25%;
-  left: -15%;
-  position: absolute;
-  background-color: purple;
-  margin: 50px 0px 50px 20px;
-  padding: 50px auto;
+header{
+  // float: left;
+  height: 30%;
+  margin: 0px auto;
+  background-color: #AB47BC;
+}
+
+.nav{
+  background-color: #8E24AA;
+}
+
+.nav button:first-child{
+  margin-top: 15px;
+}
+
+.nav button{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px auto;
+}
+
+
+.source{
   text-align: center;
 }
 
-nav a button{
-  font-family: "Bungee", cursive;
-  position: relative;
-  background: none;
-  border: none;
-  top: 250px;
-  left: 17%;
-  color: black;
-  display: block;
-  border-radius: 7px;
-  margin: 20px auto;
-}
 
-
-
-div.nav p{
-  text-align: center;
-  display: inline-block;
-}
-
-div.row div.question{
-  font-size: 20px;
-  text-overflow: hidden;
-  text-align: left;
-}
-
-
-
-div.source div.article{
+.article{
   margin: 50px 20px 15px 50px;
 }
 
 
-div.source{
-  text-align: center;
-}
 
-div.source div.article p{
+.article p{
   text-align: left;
   padding: 20px;
   margin: 10px auto;
 }
 
-div.source div.article button{
+.article button{
     height: 60px;
     width: 240px;
     font-size: 24px;
@@ -82,32 +64,36 @@ div.source div.article button{
       }
 }
 
-div.nav#dropdown-menu{
+#dropdown-menu{
   display: inline-block;
 }
 
-div.hide{
+.hide{
   animation: slideOut 0.5s;
 }
 
-div#drop-list{
+#drop-list{
   position: absolute;
   left: 65%;
   top: 25%;
   background: rgba(255,255,255,0.8);
 }
 
-div#drop-list ul li{
+#dropdown ul h3{
+  font-size: 200%;
+}
+li{
+  font-size: 100%;
   margin: 5px auto;
 }
 
-div#drop-list ul li:hover{
+#dropdown ul ul li:hover{
     font-size: 20px;
     cursor: pointer;
 }
 
 
-button#search{
+#search{
   margin-top: 60px;
   margin-left: -100px;
 }

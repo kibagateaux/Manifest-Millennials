@@ -44,7 +44,6 @@ header{
   z-index: 100;
 }
 
-
 .post_container{
   height: 30%;
   margin-bottom: 10px;
@@ -62,3 +61,7 @@ header{
   padding: 20px auto;
 }
 
+#dropdown{
+  position: absolute;
+  top: 50px;
+}

@@ -11,60 +11,46 @@
 <body>
 
 <div class="row purple lighten-2" id="header">
-<header>
-  <nav class = "nav col s2 offset-2">
-    {{#user}} <a href = "/users/{{id}}"> <button class=" u-full-width white darken-1"> Profile </button> </a> {{/user}}
-    <a href = "/posts"> <button class=" u-full-width white darken-1"> Forum </button> </a>
-    <a href = "/top-posts"> <button class="u-full-width white darken-1"> Top Posts </button> </a>
-  </nav>
 
-  <div class="question col s6 offset-s3">
-    <h2> Newsroom </h2>
-    <p> Education From The Future</p>
+<header class="row">
+  <div class="nav col s9   m2">
+    <a href="/posts" class="row"> <button class="btn col s12 m12 black"> Home </button> </a>
+    <a href="/top-posts" class="row"> <button class="btn col s12 m12 black"> Top Posts </button> </a>
+  </div>
+  <div id="question" class="center-align col s9 m6 valign-wrapper">
+    <h2 class="flow-text"> Where do you see the course of education heading in the next ten years?</h2>
   </div>
 
+  <a class='dropdown-button btn col s4 m3 black' data-activates='dropdown'>Search</a>
+
+  <ul id='dropdown' class='dropdown-content col s6 m4'>
+    <ul id="business">
+      <h3> Business </h3>
+      <li class="divider"> </li>
+      <li id="bloomberg"> Bloomberg </li>
+      <li id ="wall-street"> Wall Street Journal</li>
+      <li id="the-economist"> The Economist </li>
+      <li id="NYT-biz"> New York Times</li>
+      <li id="fortune"> Fortune </li>
+      <li id="business-insider"> Business Insider </li>
+    </ul>
+
+    <ul id="tech">
+       <h3> Tech </h3>
+      <li class="divider"> </li>
+      <li id ="ars-technica"> Ars Technica</li>
+      <li id ="hacker-news"> Hacker News</li>
+      <li id ="recode"> Recode </li>
+      <li id="hacker-news">Hacker News </li>
+      <li id="NYT-tech"> New York Times</li>
+      <li id="techcrunch">Techcrunch </li>
+      <li id="ars-technica"> Ars Technica</li>
+      <li id="engadget"> Engadget</li>
+    </ul>
+  </ul>
 
 </header>
 
-<div class="nav" id="dropdown-menu">
-
-    <button id="search" class="btn-large hoverable">
-      Search
-    </button>
-
-<div id="drop-list" class="hide col s3 m3 l3 z-depth-2 hoverable">
-
-      <ul id="business">
-         <h3> Business </h3>
-        <li class="divider"> </li>
-        <li id="bloomberg"> Bloomberg </li>
-        <li id ="wall-street"> Wall Street Journal</li>
-        <li id="the-economist"> The Economist </li>
-        <li id="NYT-biz"> New York Times</li>
-        <li id="fortune"> Fortune </li>
-        <li id="business-insider"> Business Insider </li>
-      </ul>
-
-      <ul id="tech">
-         <h3> Tech </h3>
-        <li class="divider"> </li>
-        <li id ="ars-technica"> Ars Technica</li>
-        <li id ="hacker-news"> Hacker News</li>
-        <li id ="recode"> Recode </li>
-        <li id="hacker-news">Hacker News </li>
-        <li id="NYT-tech"> New York Times</li>
-        <li id="techcrunch">Techcrunch </li>
-        <li id="ars-technica"> Ars Technica</li>
-        <li id="engadget"> Engadget</li>
-        <li> </li>
-        <li> </li>
-
-      </ul>
-
-    </div>
-</div>
-
-</div> <!--ends header  -->
 
 
 <script src="js/jquery.js"></script>
