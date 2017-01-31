@@ -45,6 +45,15 @@
 
   </div>
 
+    <div class="row">
+      <div class="commentary col s6 right">
+        <form method="POST" action="/comment/{{id}}">
+           <input placeholder="Comment" name="comment">
+           <button class="btn black white-text" type="submit"> Comment </button>
+        </form>
+      </div>
+    </div>
+
   {{/post}}
 
   <div class="comments right col s12 m6">
@@ -59,14 +68,7 @@
 
     {{/comments}}
 
-    <div class="row">
-      <div class="commentary">
-        <form method="POST" action="/comment/{{id}}">
-           <input placeholder="Comment" name="comment">
-           <button class="btn black white-text" type="submit"> Comment </button>
-        </form>
-      </div>
-    </div>
+
 
   </div>
 

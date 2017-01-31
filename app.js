@@ -1,18 +1,18 @@
-var express = require('express');
-var app = express();
-var mustacheExpress = require('mustache-express');
+const express = require('express');
+const app = express();
+const mustacheExpress = require('mustache-express');
 
-var pgp = require('pg-promise')();
-var db = pgp(process.env.DATABASE_URL || 'postgres://00y@localhost:5432/mm');
+const pgp = require('pg-promise')();
+const db = pgp(process.env.DATABASE_URL || 'postgres://00y@localhost:5432/mm');
 
-var override = require('method-override');
-var parser = require('body-parser');
-var session = require('express-session');
-var bcrypt = require('bcryptjs');
-var fetch = require('node-fetch');
+const override = require('method-override');
+const parser = require('body-parser');
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
+const fetch = require('node-fetch');
 
-var news = process.env.NEWSAPI;
-var nyt = process.env.NYT;
+const news = process.env.NEWSAPI;
+const nyt = process.env.NYT;
 
 
 app.use('/', express.static(__dirname+'/public'));
@@ -30,11 +30,38 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, function(){
   console.log(port, "vision");
 });
 
+const handlePostgresError = (err) => {
+  console.log("Handle Error Triggered")
+  console.log(err)
+  switch(err.code){
+    case "23505":
+      return "Username is already taken."
+    case "22012":
+      return "YOU DIVIDED BY ZERO!!!! YOU HAVE DOOMED US ALL."
+    case "23502":
+      return "Please fill out all fields."
+    case "23505":
+      return "Your email and username must be unique."
+    case "28000":
+      return "You are not authorized"
+    case "P0002":
+      return "No data found, please try again later"
+    case "queryResultErrorCode.noData":
+      return "Invalid email and password combination"
+    default:
+      return "There was an error, please try again"
+  }
+}
+
+const handleJSError = (err) => {
+
+
+}
 
 app.get('/',function(req,res){
   user = req.session.user;
@@ -61,37 +88,32 @@ app.post('/logon', function(req,res){
             req.session.user = user;
             res.redirect('/posts');
             console.log("session has been created")
-          } else {
-            console.log(err)
-            res.send("Error in comporator");
-          }
+          } else { res.send("Invalid username/password combination") }
     });
   })
-  .catch((err) => {
-    console.log(err)
-    res.send("User request could not be completed");
-  });
+  .catch(err => handlePostgresError(err) );
 });
 
 app.post('/signup', function(req,res){
-
-  var data = req.body;
-  var email = data.email;
-  var password = data.password;
-  var username = data.username;
-  var school = data.school;
   // use ES6 deconstructing
-  // {email, password, username, school} = req.body
+  let {email, password, username, school, age} = req.body
+
   console.log(email, password, username, school);
 
   bcrypt.hash(password, 10, function(err, hash){
     db.none(
-      "INSERT INTO users (username, hash, email) VALUES ($1, $2, $3)",
-      [username, hash, email]
+      "INSERT INTO users (username, hash, email, school, age) VALUES ($1, $2, $3, $4, $5)",
+      [username, hash, email, school, age]
     )
-    //sends signup data for automatic login
-    .then(res.redirect('/logon'))
-  });
+    .then( res.redirect('/logon') )
+    .catch(err => {
+
+      console.log("Signup POST catch")
+      console.log(handlePostgresError(err));
+      res.send(handlePostgresError(err));
+
+    });
+ });
 }); //ends POST request
 
 
@@ -111,7 +133,7 @@ app.post('/news', function(req,res){
 });
 
 app.get('/posts', function(req,res){
-  var user = req.session.user;
+  let user = req.session.user;
   console.log("Session User from Posts")
   console.log(user);
   db.any(
@@ -122,40 +144,35 @@ app.get('/posts', function(req,res){
    "SELECT * FROM posts"
     ).then(function(data){
 
-      console.log("Is there a user");
-      console.log(session.user);
-      console.log("Is there not a user?")
-      console.log(!session.user);
-
       (!session.user)? (isLoggedOut = true) : (isLoggedOut = false)
-    var forum = {'forum': data, 'user': user, isLoggedOut: isLoggedOut};
-    console.log("Data being rendered from posts")
-    console.log(forum)
+    let forum = {'forum': data, 'user': user, isLoggedOut: isLoggedOut};
+
     res.render('posts', forum);
   });
 });
 
 app.post('/posts', function(req,res){
 
-  var user = req.session.user;
-  var subject = req.body.subject;
-  var body = req.body.body;
-  var username = req.body.username;
+  let user = req.session.user;
+  let {subject, body} = req.body
 
-  console.log(subject, body, username, user.id);
+  console.log(user)
+
+  console.log(subject, body, user.username, user.id);
 
   db.none("INSERT INTO posts(subject, body, user_name, user_id) VALUES ($1,$2,$3,$4)",
-    [subject, body, username, user.id])
+    [subject, body, user.username, user.id])
   .then(function(){
       res.redirect('/posts');
     })
   .catch(function(err){
+    res.send("You must be logged in and provide text in order to post")
     throw err;
   })
 });
 
 app.get('/posts/:id', function(req,res){
- var user = req.session.user;
+ let user = req.session.user;
  db.one(
   "SELECT * FROM posts WHERE id = $1",
   // "SELECT * FROM posts, comments WHERE posts.id, post_id = $1",
@@ -179,9 +196,9 @@ app.get('/posts/:id', function(req,res){
 });
 
 app.post('/posts/:id', function(req,res){
-  var user = req.session.user;
-  var subject = req.body.subject;
-  var body = req.body.body;
+  let user = req.session.user;
+  let subject = req.body.subject;
+  let body = req.body.body;
   console.log(subject, body);
 
   db.none("INSERT INTO posts(subject, body, user_id) VALUES ($1,$2,$3)",
@@ -196,21 +213,21 @@ app.post('/posts/:id', function(req,res){
 });
 
 app.get('/top-posts', function(req, res){
-  var user = req.session.user;
+  let user = req.session.user;
   db.any("SELECT * FROM posts INNER JOIN comments ON (post_id = posts.id) ORDER BY ups")
   .then(function(data){
     console.log(data);
-    // res.render('top', {'post': data});
-    res.render('posts', {'forum': data});
-  }).catch(function(e){
-    console.log(e);
+
+    res.render('posts', {'forum': data, user: user});
+  }).catch(function(err){
+    console.log(err);
   })
 });
 
 app.post('/comment/:id', function(req,res){
-  var user = req.session.user;
-  var comment = req.body.comment;
-  var post_id = req.params.id;
+  let user = req.session.user;
+  let comment = req.body.comment;
+  let post_id = req.params.id;
   console.log(comment, post_id);
   db.none("INSERT INTO comments(comment, post_id, user_id) VALUES ($1,$2,$3)",
     [comment, post_id, user.id])
@@ -225,7 +242,7 @@ app.get('/users', function(req,res){
 })
 
 app.get('/users/:name', function(req,res){
-    var user = req.session.user;
+    let user = req.session.user;
     db.any("SELECT * FROM posts WHERE user_name = $1",
       [req.params.name]
     )
@@ -240,12 +257,12 @@ app.get('/users/:name', function(req,res){
 
 // .update?
 app.put('/users/:name', function(req,res){
-  var update = req.body;
-  var user = req.session.user;
+  let update = req.body;
+  let user = req.session.user;
   bcrypt.hash(update.password, 10, function(err, hash){
     db.none(
      "UPDATE users SET username=$1, hash=$2, email=$3, school=$4 WHERE username = $5",
-    [update.username, hash, update.email, update.school, req.params.name]
+     [update.username, hash, update.email, update.school, req.params.name]
     )
   .then(function(){
     res.redirect('/user/'+ user.id);

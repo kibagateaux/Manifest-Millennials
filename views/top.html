@@ -11,14 +11,15 @@
 
   <div class = "post_container">
 
-  {{#data}}
+
+  {{#forum}}
     <a href="/forum/{{posts.id}}">
      <h4> {{subject}} </h4>
     </a>
 
     <div class = "post_info">
       <h5> by <a href="/profile/{{users.id}}">
-      {{username}} </a> </h5>  <p> at {{date}}</p>
+      {{user_name}} </a> </h5>
     </div>
 
     <p> {{body}} </p>
@@ -28,7 +29,7 @@
          <button type="submit"> Comment </button>
       </form>
   </div>
-  {{/data}}
+  {{/forum}}
 
   </div>
 

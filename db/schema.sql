@@ -16,6 +16,7 @@ CREATE TABLE users(
   hash varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL,
   school varchar(100),
+  age integer,
   ups integer
 );
 
