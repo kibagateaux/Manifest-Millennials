@@ -18,12 +18,12 @@ jQuery(document).ready(function($) {
 
             console.log(a[i].urlToImage);
 
-            $('.source').append('<div class="col s8 article offset-s2" id="' + article + '"></div>');
+            $('.source').append('<div class="col s6 article offset-s3" id="' + article + '"></div>');
 
             $('#' + article).append('<img class="col s12 responsive-image" id="' + image + '">');
             $('#' + image).attr('src', a[i].urlToImage);
 
-            $('#' + article).append('<a href="' + a[i].url + '">' +
+            $('#' + article).prepend('<a href="' + a[i].url + '">' +
                 '<h4 class="title col s12">' + a[i].title + '</h4>' +
                 '</a>');
             $('#' + article).append('<p class="center-align">' + a[i].description + '</p>');
