@@ -98,14 +98,14 @@ app.post('/logon', function(req,res){
 
 app.post('/signup', function(req,res){
   // use ES6 deconstructing
-  let {email, password, username, school, age} = req.body
+  let {email, password, username, school} = req.body
 
   console.log(email, password, username, school);
 
   bcrypt.hash(password, 10, function(err, hash){
     db.none(
-      "INSERT INTO users (username, hash, email, school, age) VALUES ($1, $2, $3, $4, $5)",
-      [username, hash, email, school, age]
+      "INSERT INTO users (username, hash, email, school) VALUES ($1, $2, $3, $4)",
+      [username, hash, email, school]
     )
     .catch(err => {
 
